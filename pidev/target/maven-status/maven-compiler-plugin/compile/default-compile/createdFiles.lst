@@ -1,0 +1,9 @@
+controller\NewClass.class
+com\esprit\pidev\MainApp.class
+model\entity\NewClass.class
+model\interfaces\implement\NewClass.class
+model\NewClass.class
+view\NewClass.class
+com\esprit\pidev\FXMLController.class
+configuration\DataSource.class
+model\interfaces\NewClass.class
