@@ -5,6 +5,8 @@
  */
 package com.esprit.pidev.dao.test;
 
+import com.esprit.pidev.models.database.DataSource;
+import java.sql.Connection;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -36,10 +38,8 @@ public class ImplPersonneDAOTest {
     @After
     public void tearDown() {
     }
-
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+   @Test
+   public void test(){
+      // Connection c = DataSource.getInstance().getConnection();
+   }
 }
