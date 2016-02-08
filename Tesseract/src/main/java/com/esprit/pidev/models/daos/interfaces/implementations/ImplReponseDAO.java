@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.esprit.pidev.models.daos.interfaces;
+package com.esprit.pidev.models.daos.interfaces.implementations;
+
+import com.esprit.pidev.models.daos.interfaces.IReponseDAO;
 
 /**
  *
  * @author BoB
  */
-public interface ISession_coursDAO {
+public class ImplReponseDAO implements IReponseDAO{
     
 }

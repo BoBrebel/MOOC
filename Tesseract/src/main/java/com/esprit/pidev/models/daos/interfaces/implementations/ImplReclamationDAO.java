@@ -11,6 +11,6 @@ import com.esprit.pidev.models.daos.interfaces.IReclamationDAO;
  *
  * @author BoB
  */
-public class ImpReclamationDAO implements IReclamationDAO{
+public class ImplReclamationDAO implements IReclamationDAO{
     
 }
