@@ -5,10 +5,12 @@
  */
 package com.esprit.pidev.models.daos.interfaces.implementations;
 
+import com.esprit.pidev.models.daos.interfaces.IReclamationDAO;
+
 /**
  *
  * @author BoB
  */
-public class ImpReclamationDAO {
+public class ImpReclamationDAO implements IReclamationDAO{
     
 }

@@ -5,10 +5,12 @@
  */
 package com.esprit.pidev.models.daos.interfaces.implementations;
 
+import com.esprit.pidev.models.daos.interfaces.ISession_coursDAO;
+
 /**
  *
  * @author BoB
  */
-public class ImpSession_coursDAO {
+public class ImpSession_coursDAO implements ISession_coursDAO {
     
 }
