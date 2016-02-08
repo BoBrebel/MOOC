@@ -5,10 +5,25 @@
  */
 package com.esprit.pidev.models.daos.interfaces;
 
+import com.esprit.pidev.models.entities.Log;
+import java.util.List;
+
 /**
  *
  * @author Choukou_Tracker
  */
 public interface ILogDAO {
+    
+    public boolean ajouterLog(Log Log);
+    
+    public boolean supprimerLog(int id);
+        
+    public List<Log> getallLog();
+    
+    public Log getLogbyid(int id);
+    
+    public List<Log> getLogbyuser(int idUser);
+    
+    public List<Log> getLogbytache(String Tache);
     
 }
