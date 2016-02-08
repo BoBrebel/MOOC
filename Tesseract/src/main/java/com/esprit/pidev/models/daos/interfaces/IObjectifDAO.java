@@ -5,7 +5,8 @@
  */
 package com.esprit.pidev.models.daos.interfaces;
 
-import com.esprit.tesseract.models.beans.Objectif;
+
+import com.esprit.pidev.models.entities.Objectif;
 import java.sql.SQLException;
 import java.util.List;
 
