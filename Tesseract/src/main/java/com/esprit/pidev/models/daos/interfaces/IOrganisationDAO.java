@@ -4,11 +4,26 @@
  * and open the template in the editor.
  */
 package com.esprit.pidev.models.daos.interfaces;
+import com.esprit.pidev.models.entities.Organisation;
+import java.util.List;
 
 /**
  *
  * @author BoB
  */
 public interface IOrganisationDAO {
+    
+    public boolean addOrganisation(Organisation org);
+    
+    public boolean deleteOrganisation(int idOrg);
+    
+    boolean updateOrganisation(Organisation org);
+        
+    public List<Organisation> displayOrganisation();
+    
+    public Organisation getOrganisationByid(int id);
+    
+    public Organisation getOrganisationByNom(String nom);
+    
     
 }

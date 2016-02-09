@@ -1,6 +1,8 @@
 
 package com.esprit.pidev.models.entities;
 
+import java.util.Date;
+
 
 public class Challenge {
    private int idChallenge ;
@@ -8,13 +10,13 @@ public class Challenge {
    private String nom ; 
    private String description ;
    private String theme ;
-   private String dateChallenge ;
+   private Date dateChallenge ;
    private Organisation organisation ;
 
     public Challenge() {
     }
 
-    public Challenge(String nom, String description, String theme, String dateChallenge, Organisation organisation) {
+    public Challenge(String nom, String description, String theme, Date dateChallenge, Organisation organisation) {
         this.nom = nom;
         this.description = description;
         this.theme = theme;
@@ -22,7 +24,7 @@ public class Challenge {
         this.organisation = organisation;
     }
 
-    public Challenge(int idChallenge, int idOrganisation, String nom, String description, String theme, String dateChallenge, Organisation organisation) {
+    public Challenge(int idChallenge, int idOrganisation, String nom, String description, String theme, Date dateChallenge, Organisation organisation) {
         this.idChallenge = idChallenge;
         this.idOrganisation = idOrganisation;
         this.nom = nom;
@@ -72,11 +74,11 @@ public class Challenge {
         this.theme = theme;
     }
 
-    public String getDateChallenge() {
+    public Date getDateChallenge() {
         return dateChallenge;
     }
 
-    public void setDateChallenge(String dateChallenge) {
+    public void setDateChallenge(Date dateChallenge) {
         this.dateChallenge = dateChallenge;
     }
 
