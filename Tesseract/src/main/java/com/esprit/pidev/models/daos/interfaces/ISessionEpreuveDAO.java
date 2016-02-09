@@ -5,10 +5,24 @@
  */
 package com.esprit.pidev.models.daos.interfaces;
 
+import com.esprit.pidev.models.entities.SessionEpreuve;
+import java.util.List;
+
 /**
  *
  * @author BoB
  */
 public interface ISessionEpreuveDAO {
+    
+    public boolean ajouterSessionEpreuve(SessionEpreuve sessionEpreuve);
+    
+    public boolean modifierSessionEpreuve(SessionEpreuve sessionEpreuve);
+    
+    public List<SessionEpreuve> getSessionEpreuvebyUserid(int idUser);
+    
+    public List<SessionEpreuve> getSessionEpreuvebyidEpreuve(int idEpreuve);
+    
+    public List<SessionEpreuve> getSessoEpreuvebynote(float note);
+    
     
 }
