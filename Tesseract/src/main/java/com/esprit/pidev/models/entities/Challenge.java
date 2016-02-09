@@ -10,22 +10,17 @@ public class Challenge {
    private String nom ; 
    private String description ;
    private String theme ;
-<<<<<<< HEAD
-   private String dateChallenge ;
+
   
-=======
    private Date dateChallenge ;
    private Organisation organisation ;
->>>>>>> origin/master
+
 
     public Challenge() {
     }
 
-<<<<<<< HEAD
-    public Challenge(String nom, String description, String theme, String dateChallenge) {
-=======
     public Challenge(String nom, String description, String theme, Date dateChallenge, Organisation organisation) {
->>>>>>> origin/master
+
         this.nom = nom;
         this.description = description;
         this.theme = theme;

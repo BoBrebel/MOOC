@@ -20,6 +20,7 @@ public class BanForum {
     }
 
 
+
     public BanForum(Date dateBan, int duree) {
         this.dateBan = dateBan;
         this.duree = duree;
@@ -27,6 +28,7 @@ public class BanForum {
     }
 
   
+ 
     public BanForum(int idUtilisateur, Date dateBan, String Cause, int duree, Utilisateur utilisateur) {
 
         this.idUtilisateur = idUtilisateur;
@@ -103,11 +105,10 @@ public class BanForum {
     @Override
     public String toString() {
 
+
         return "BanForum{" + "idBan=" + idBan + ", idUtilisateur=" + idUtilisateur + ", dateBan=" + dateBan + ", Cause=" + Cause + ", duree=" + duree + " '}'";
 
-    }
-
-   
+   }
     
 
 }
