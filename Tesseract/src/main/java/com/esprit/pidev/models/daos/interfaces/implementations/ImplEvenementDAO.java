@@ -5,9 +5,10 @@
  */
 package com.esprit.pidev.models.daos.interfaces.implementations;
 
-import com.esprit.pidev.models.daos.interfaces.IOrganisationDAO;
+import com.esprit.pidev.models.daos.interfaces.IChallengeDAO;
+import com.esprit.pidev.models.daos.interfaces.IEvenementDAO;
 import com.esprit.pidev.models.database.DataSource;
-import com.esprit.pidev.models.entities.Challenge;
+import com.esprit.pidev.models.entities.Evenement;
 import com.esprit.pidev.models.entities.Organisation;
 import java.sql.Connection;
 import java.sql.Date;
@@ -20,42 +21,45 @@ import java.util.List;
 
 /**
  *
- * @author BoB
+ * @author haikal
  */
-public class ImplOrganisationDAO implements IOrganisationDAO {
+public class ImplEvenementDAO implements IEvenementDAO{
     private Connection connection;
 
-    public ImplOrganisationDAO() {
+    public ImplEvenementDAO() {
         connection = DataSource.getInstance().getConnection();
     }
     
+
     @Override
-    public boolean addOrganisation(Organisation org) {
-       String query = "Insert into organisation(`id_organisation`, `nom`, `adresse`, `matricule` , `photo` ) "
-                + "values (NULL, ?, ?, ?, ? ,? );";
+    public boolean addEvenement(Evenement evn) {
+        String query = "Insert into evenement(`id_evenement`, `id_organisation`, `nom`, `description` , `nbr_max` , `affiche` , `date_evenement`) "
+                + "values (NULL, ?, ?, ?, ? ,? ,?,?);";
         try {
             PreparedStatement pSt = connection.prepareStatement(query);
-            pSt.setInt(1, org.getIdOrganisation());
-            pSt.setString(2, org.getNom());
-            pSt.setString(3, org.getAdresse());
-            pSt.setString(4, org.getMatricule());
-            pSt.setString(5, org.getPhoto());
+            pSt.setInt(1, evn.getIdEvenement());
+            pSt.setInt(2, evn.getIdOrganisation());
+            pSt.setString(3, evn.getNom());
+            pSt.setString(4, evn.getDescription());
+            pSt.setInt(5, evn.getNbrMax());
+            pSt.setString(6, evn.getAffiche());
+            pSt.setDate(7, (Date) evn.getDateEvenement());
             pSt.executeUpdate();
             return true;
         } catch (SQLException ex) {
-            System.out.println("error to add organsisation !!");
+            System.out.println("error to add evenement !!");
             return false;
         }
     }
 
     @Override
-    public boolean deleteOrganisation(int idOrg) {
-                String query="delete from organisation where id_organisation =?";
+    public boolean deleteEvenement(int idEvn) {
+                String query="delete from evenement where id_evenement =?";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setInt(1, idOrg);
+            ps.setInt(1, idEvn);
             ps.executeUpdate();
-            System.out.println("organisation supprimé");
+            System.out.println("evenement supprimé");
             return true;
         } catch (SQLException ex) {
             System.out.println("erreur lors de la suppression " + ex.getMessage());
@@ -64,13 +68,13 @@ public class ImplOrganisationDAO implements IOrganisationDAO {
     }
 
     @Override
-    public boolean updateOrganisation(Organisation org) {
+    public boolean updateEvenement(Evenement evn) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Organisation> displayOrganisation() {
-        ArrayList<Organisation> liste = new ArrayList<Organisation>();
+    public List<Evenement> displayEvenement() {
+        ArrayList<Evenement> liste = new ArrayList<Evenement>();
         
         String query = "select * from Organisation";
         
@@ -79,14 +83,16 @@ public class ImplOrganisationDAO implements IOrganisationDAO {
             ResultSet resultat = statement.executeQuery(query);
 
             while (resultat.next()) {
-                Organisation og = new Organisation();                
-                og.setIdOrganisation(resultat.getInt(1));
-                og.setNom(resultat.getString(2));
-                og.setAdresse(resultat.getString(3));
-                og.setMatricule(resultat.getString(4));
-                og.setPhoto(resultat.getString(5));
+                Evenement evn = new Evenement();                
+                evn.setIdEvenement(resultat.getInt(1));
+                evn.setIdOrganisation(resultat.getInt(2));
+                evn.setNom(resultat.getString(3));
+                evn.setDescription(resultat.getString(4));
+                evn.setNbrMax(resultat.getInt(5));
+                evn.setAffiche(resultat.getString(6));
+                evn.setDateEvenement(resultat.getDate(7));
 
-                liste.add(og);
+                liste.add(evn);
             }
             return liste;
         } catch (SQLException ex) {
@@ -97,12 +103,17 @@ public class ImplOrganisationDAO implements IOrganisationDAO {
     }
 
     @Override
-    public Organisation getOrganisationByid(int id) {
+    public List<Evenement> displayChallengeByEvenement(int idEvn) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Organisation getOrganisationByNom(String nom) {
+    public Evenement getEvenementByid(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Evenement getEvenementByNom(String nom) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

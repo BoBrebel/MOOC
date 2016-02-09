@@ -31,13 +31,13 @@ public class DataSource {
     private DataSource() {
         properties = new Properties();
         try {
-            properties.load(new FileInputStream(new File("config.properties")));
-            url = properties.getProperty("url");
-            login = properties.getProperty("login");
-            password = properties.getProperty("password");
+            //properties.load(new FileInputStream(new File("config.properties")));
+            url ="jdbc:mysql://localhost:3306/tesseract"; //properties.getProperty("url");
+            login ="root"; //properties.getProperty("login");
+            password = "";//properties.getProperty("password");
             connection = DriverManager.getConnection(url,login,password);
-        } catch (IOException ex) {
-            Logger.getLogger(DataSource.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (IOException ex) {
+//            Logger.getLogger(DataSource.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(DataSource.class.getName()).log(Level.SEVERE, null, ex);
         }

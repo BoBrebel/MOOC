@@ -1,14 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.esprit.pidev.models.daos.interfaces;
 
-/**
- *
- * @author haikal
- */
+import com.esprit.pidev.models.entities.Apprenant;
+import java.sql.SQLException;
+import java.util.List;
+
+
 public interface IApprenantDAO {
+    
+    
+   public boolean ajouterApprenant(Apprenant apprenant) throws SQLException ;
+   
+   public Apprenant getApprenantByLogin(String login)throws SQLException;
+   
+   public boolean supprimerApprennantByLogin(String login)throws SQLException;
+   
+   public List<Apprenant> getAllApprenants()throws SQLException;
+   
+   public boolean modifierApprenant (String login , Apprenant newApprenant)throws SQLException;
+   
+   
     
 }

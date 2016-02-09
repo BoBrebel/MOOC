@@ -1,6 +1,8 @@
 
 package com.esprit.pidev.models.entities;
 
+import java.util.Date;
+
 
 public class Challenge {
    private int idChallenge ;
@@ -8,28 +10,37 @@ public class Challenge {
    private String nom ; 
    private String description ;
    private String theme ;
+<<<<<<< HEAD
    private String dateChallenge ;
+  
+=======
+   private Date dateChallenge ;
    private Organisation organisation ;
+>>>>>>> origin/master
 
     public Challenge() {
     }
 
-    public Challenge(String nom, String description, String theme, String dateChallenge, Organisation organisation) {
+<<<<<<< HEAD
+    public Challenge(String nom, String description, String theme, String dateChallenge) {
+=======
+    public Challenge(String nom, String description, String theme, Date dateChallenge, Organisation organisation) {
+>>>>>>> origin/master
         this.nom = nom;
         this.description = description;
         this.theme = theme;
         this.dateChallenge = dateChallenge;
-        this.organisation = organisation;
+        
     }
 
-    public Challenge(int idChallenge, int idOrganisation, String nom, String description, String theme, String dateChallenge, Organisation organisation) {
+    public Challenge(int idChallenge, int idOrganisation, String nom, String description, String theme, Date dateChallenge, Organisation organisation) {
         this.idChallenge = idChallenge;
         this.idOrganisation = idOrganisation;
         this.nom = nom;
         this.description = description;
         this.theme = theme;
         this.dateChallenge = dateChallenge;
-        this.organisation = organisation;
+     
     }
 
     public int getIdChallenge() {
@@ -72,21 +83,15 @@ public class Challenge {
         this.theme = theme;
     }
 
-    public String getDateChallenge() {
+    public Date getDateChallenge() {
         return dateChallenge;
     }
 
-    public void setDateChallenge(String dateChallenge) {
+    public void setDateChallenge(Date dateChallenge) {
         this.dateChallenge = dateChallenge;
     }
 
-    public Organisation getOrganisation() {
-        return organisation;
-    }
-
-    public void setOrganisation(Organisation organisation) {
-        this.organisation = organisation;
-    }
+   
 
     @Override
     public int hashCode() {
@@ -112,7 +117,7 @@ public class Challenge {
 
     @Override
     public String toString() {
-        return "Challenge{" + "idChallenge=" + idChallenge + ", idOrganisation=" + idOrganisation + ", nom=" + nom + ", description=" + description + ", theme=" + theme + ", dateChallenge=" + dateChallenge + ", organisation=" + organisation + '}';
+        return "Challenge{" + "idChallenge=" + idChallenge + ", idOrganisation=" + idOrganisation + ", nom=" + nom + ", description=" + description + ", theme=" + theme + ", dateChallenge=" + dateChallenge + ", ";
     }
    
    

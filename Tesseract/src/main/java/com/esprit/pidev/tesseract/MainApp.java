@@ -1,5 +1,10 @@
 package com.esprit.pidev.tesseract;
 
+import com.esprit.pidev.models.database.DataSource;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
@@ -12,14 +17,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
-        
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add("/styles/Styles.css");
-        
-        stage.setTitle("JavaFX and Maven");
-        stage.setScene(scene);
-        stage.show();
+     //   Connection cnx =DataSource.getInstance().getConnection();
     }
 
     /**
@@ -30,8 +28,13 @@ public class MainApp extends Application {
      *
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        launch(args);
+    public static void main(String[] args) throws SQLException {
+//        Connection cnx =DataSource.getInstance().getConnection();
+//        Statement s = cnx.createStatement();
+//        ResultSet resultSet =  s.executeQuery("select * from utilisateur");
+//        while (resultSet.next()) {            
+//            System.out.println(resultSet.getString(2));
+//        }
     }
 
 }

@@ -1,14 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.esprit.pidev.models.daos.interfaces;
 
-/**
- *
- * @author BoB
- */
+import com.esprit.pidev.models.entities.Reclamation;
+import java.sql.SQLException;
+import java.util.List;
+
 public interface IReclamationDAO {
-    
+
+    public boolean ajouterReclamation(Reclamation reclamation, int idUtilisateur)throws SQLException;
+
+    public List<Reclamation> getReclamationsByIdUser(int idUtilisateur)throws SQLException;
+
+    public boolean modifierReclamation(int idReclamation, Reclamation newReclamation)throws SQLException;
+
 }

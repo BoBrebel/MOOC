@@ -5,31 +5,36 @@
  */
 package com.esprit.pidev.models.entities;
 
+import java.util.Date;
+
 public class BanForum {
 
     private int idBan;
     private int idUtilisateur;
-    private String dateBan;
+    private Date dateBan;
+    private String Cause;
     private int duree;
-    private Utilisateur utilisateur ;
+ 
 
     public BanForum() {
     }
 
-    public BanForum(String dateBan, int duree, Utilisateur utilisateur) {
+
+    public BanForum(Date dateBan, int duree) {
         this.dateBan = dateBan;
         this.duree = duree;
-        this.utilisateur = utilisateur;
+       
     }
 
-    public BanForum(int idBan, int idUtilisateur, String dateBan, int duree, Utilisateur utilisateur) {
-        this.idBan = idBan;
+  
+    public BanForum(int idUtilisateur, Date dateBan, String Cause, int duree, Utilisateur utilisateur) {
+
         this.idUtilisateur = idUtilisateur;
         this.dateBan = dateBan;
+        this.Cause = Cause;
         this.duree = duree;
-        this.utilisateur = utilisateur;
+        
     }
-    
 
     public int getIdBan() {
         return idBan;
@@ -47,12 +52,20 @@ public class BanForum {
         this.idUtilisateur = idUtilisateur;
     }
 
-    public String getDateBan() {
+    public Date getDateBan() {
         return dateBan;
     }
 
-    public void setDateBan(String dateBan) {
+    public void setDateBan(Date dateBan) {
         this.dateBan = dateBan;
+    }
+
+    public String getCause() {
+        return Cause;
+    }
+
+    public void setCause(String Cause) {
+        this.Cause = Cause;
     }
 
     public int getDuree() {
@@ -63,18 +76,12 @@ public class BanForum {
         this.duree = duree;
     }
 
-    public Utilisateur getUtilisateur() {
-        return utilisateur;
-    }
-
-    public void setUtilisateur(Utilisateur utilisateur) {
-        this.utilisateur = utilisateur;
-    }
+ 
 
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 97 * hash + this.idBan;
+        hash = 37 * hash + this.idBan;
         return hash;
     }
 
@@ -92,12 +99,15 @@ public class BanForum {
         }
         return true;
     }
-  
+
     @Override
     public String toString() {
-        return "BanForum{" + "idBan=" + idBan + ", idUtilisateur=" + idUtilisateur + ", dateBan=" + dateBan + ", duree=" + duree + ", utilisateur=" + utilisateur + '}';
+
+        return "BanForum{" + "idBan=" + idBan + ", idUtilisateur=" + idUtilisateur + ", dateBan=" + dateBan + ", Cause=" + Cause + ", duree=" + duree + " '}'";
+
     }
-    
+
+   
     
 
 }
