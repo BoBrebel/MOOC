@@ -17,10 +17,32 @@ public abstract class Utilisateur {
     protected String adresse;
     protected String mail;
     protected String photo;
-    protected List<Notification> listNotification = new ArrayList<>();
-    protected List<Log> listLog = new ArrayList<>();
-    protected List<Reclamation> listReclamation = new ArrayList<>();
-    protected List<SujetForum> listSujet = new ArrayList<>();
+  
+    
+   
+    protected List<SujetForum> sujetForumList;
+
+    protected List<Log> logList;
+
+    protected List<Invitation> invitationList;
+
+    protected List<InscriptionChallenge> inscriptionChallengeList;
+
+    protected List<BanForum> banForumList;
+
+    protected List<SessionCours> sessionCoursList;
+
+    protected List<InvitationEvenement> inscriptionEvenementList;
+
+    protected List<Notification> notificationList;
+
+    protected Organisation idOrganisation;
+
+    protected List<CommentaireForum> commentraireForumList;
+
+    protected List<Reclamation> reclamationList;
+
+    protected List<SessionEpreuve> sessionEpreuveList;
 
     public Utilisateur(int idUtilisateur, String nomUtilisateur, String motDePass, String nom, String prenom, Date dateNaissance, int tel, String adresse, String mail, String photo) {
         this.idUtilisateur = idUtilisateur;
@@ -152,39 +174,103 @@ public abstract class Utilisateur {
         return true;
     }
 
-    public List<Notification> getListNotification() {
-        return listNotification;
+    public List<SujetForum> getSujetForumList() {
+        return sujetForumList;
     }
 
-    public void setListNotification(List<Notification> listNotification) {
-        this.listNotification = listNotification;
+    public void setSujetForumList(List<SujetForum> sujetForumList) {
+        this.sujetForumList = sujetForumList;
     }
 
-    public List<Log> getListLog() {
-        return listLog;
+    public List<Log> getLogList() {
+        return logList;
     }
 
-    public void setListLog(List<Log> listLog) {
-        this.listLog = listLog;
+    public void setLogList(List<Log> logList) {
+        this.logList = logList;
     }
 
-    public List<Reclamation> getListReclamation() {
-        return listReclamation;
+    public List<Invitation> getInvitationList() {
+        return invitationList;
     }
 
-    public void setListReclamation(List<Reclamation> listReclamation) {
-        this.listReclamation = listReclamation;
+    public void setInvitationList(List<Invitation> invitationList) {
+        this.invitationList = invitationList;
     }
 
-    public List<SujetForum> getListSujet() {
-        return listSujet;
+    public List<InscriptionChallenge> getInscriptionChallengeList() {
+        return inscriptionChallengeList;
     }
 
-    public void setListSujet(List<SujetForum> listSujet) {
-        this.listSujet = listSujet;
+    public void setInscriptionChallengeList(List<InscriptionChallenge> inscriptionChallengeList) {
+        this.inscriptionChallengeList = inscriptionChallengeList;
     }
+
+    public List<BanForum> getBanForumList() {
+        return banForumList;
+    }
+
+    public void setBanForumList(List<BanForum> banForumList) {
+        this.banForumList = banForumList;
+    }
+
+    public List<SessionCours> getSessionCoursList() {
+        return sessionCoursList;
+    }
+
+    public void setSessionCoursList(List<SessionCours> sessionCoursList) {
+        this.sessionCoursList = sessionCoursList;
+    }
+
+    public List<InvitationEvenement> getInscriptionEvenementList() {
+        return inscriptionEvenementList;
+    }
+
+    public void setInscriptionEvenementList(List<InvitationEvenement> inscriptionEvenementList) {
+        this.inscriptionEvenementList = inscriptionEvenementList;
+    }
+
+    public List<Notification> getNotificationList() {
+        return notificationList;
+    }
+
+    public void setNotificationList(List<Notification> notificationList) {
+        this.notificationList = notificationList;
+    }
+
+    public Organisation getIdOrganisation() {
+        return idOrganisation;
+    }
+
+    public void setIdOrganisation(Organisation idOrganisation) {
+        this.idOrganisation = idOrganisation;
+    }
+
+    public List<CommentaireForum> getCommentraireForumList() {
+        return commentraireForumList;
+    }
+
+    public void setCommentraireForumList(List<CommentaireForum> commentraireForumList) {
+        this.commentraireForumList = commentraireForumList;
+    }
+
+    public List<Reclamation> getReclamationList() {
+        return reclamationList;
+    }
+
+    public void setReclamationList(List<Reclamation> reclamationList) {
+        this.reclamationList = reclamationList;
+    }
+
+    public List<SessionEpreuve> getSessionEpreuveList() {
+        return sessionEpreuveList;
+    }
+
+    public void setSessionEpreuveList(List<SessionEpreuve> sessionEpreuveList) {
+        this.sessionEpreuveList = sessionEpreuveList;
+    }
+
     
-
     @Override
     public String toString() {
         return "Utilisateur{" + "idUtilisateur=" + idUtilisateur + ", nomUtilisateur=" + nomUtilisateur + ", motDePass=" + motDePass + ", nom=" + nom + ", prenom=" + prenom + ", dateNaissance=" + dateNaissance + ", tel=" + tel + ", adresse=" + adresse + ", mail=" + mail + ", photo=" + photo + '}';

@@ -29,12 +29,7 @@ public class MainApp extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException {
-//        Connection cnx =DataSource.getInstance().getConnection();
-//        Statement s = cnx.createStatement();
-//        ResultSet resultSet =  s.executeQuery("select * from utilisateur");
-//        while (resultSet.next()) {            
-//            System.out.println(resultSet.getString(2));
-//        }
+        System.out.println("hello");
     }
 
 }

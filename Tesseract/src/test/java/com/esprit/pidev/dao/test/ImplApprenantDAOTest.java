@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.esprit.pidev.dao.test;
 
 import com.esprit.pidev.models.daos.interfaces.DAOFactory;
@@ -27,10 +23,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Ignore;
 
-/**
- *
- * @author haikal
- */
+
 public class ImplApprenantDAOTest {
 
     public ImplApprenantDAOTest() {

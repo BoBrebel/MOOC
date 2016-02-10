@@ -18,12 +18,17 @@ import com.esprit.pidev.models.daos.interfaces.implementations.ImplQuestionDAO;
 import com.esprit.pidev.models.daos.interfaces.implementations.ImplReclamationDAO;
 import com.esprit.pidev.models.daos.interfaces.implementations.ImplReponseDAO;
 import com.esprit.pidev.models.daos.interfaces.implementations.ImplSessionCoursDAO;
+import com.esprit.pidev.models.daos.interfaces.implementations.ImplSessionEpreuveDAO;
 import com.esprit.pidev.models.daos.interfaces.implementations.ImplSujetForumDAO;
 
 public interface DAOFactory {
 
     public static IAdministrateurDAO getAdministrateurDAO() {
         return new ImplAdministrateurDAO();
+    }
+
+    public static ISessionEpreuveDAO getSessionEpreuveDAO() {
+        return new ImplSessionEpreuveDAO();
     }
 
     public static IFormateurDAO getFormateurDAO() {

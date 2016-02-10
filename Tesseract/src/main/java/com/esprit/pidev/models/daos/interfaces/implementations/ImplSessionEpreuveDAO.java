@@ -77,6 +77,7 @@ public class ImplSessionEpreuveDAO implements ISessionEpreuveDAO{
             while (resultat.next()) {
                 SessionEpreuve sessionEpreuve = new SessionEpreuve();
                 sessionEpreuve.setId_utilisateur(resultat.getInt(1));
+               
                 sessionEpreuve.setId_epreuve(resultat.getInt(2));
                 sessionEpreuve.setNote(resultat.getFloat(3));
                 sessionEpreuve.setNbr_tentative(resultat.getInt(4));
