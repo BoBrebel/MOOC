@@ -4,11 +4,19 @@
  * and open the template in the editor.
  */
 package com.esprit.pidev.models.daos.interfaces;
+import com.esprit.pidev.models.entities.Question;
+import java.util.List;
 
 /**
  *
- * @author BoB
+ * @author Bacem
  */
 public interface IQuestionDAO {
+    
+    boolean createQuestion(Question question);
+    boolean deleteQuestion(int id);
+    boolean updateQuestion(Question question, int id);
+    Question searchQuestion(int id);
+    List<Question> displayQuestion();
     
 }

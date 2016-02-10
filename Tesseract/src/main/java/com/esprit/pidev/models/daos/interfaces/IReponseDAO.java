@@ -5,10 +5,18 @@
  */
 package com.esprit.pidev.models.daos.interfaces;
 
+import com.esprit.pidev.models.entities.Reponse;
+import java.util.List;
+
 /**
  *
- * @author BoB
+ * @author Bacem
  */
 public interface IReponseDAO {
+    boolean createReponse(Reponse reponse);
+    boolean deleteReponse(int id);
+    boolean updateReponse(Reponse reponse, int id);
+    Reponse searchReponse(int id);
+    List<Reponse> displayReponse();
     
 }
