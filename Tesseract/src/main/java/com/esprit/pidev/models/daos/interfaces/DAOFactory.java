@@ -7,6 +7,9 @@ import com.esprit.pidev.models.daos.interfaces.implementations.ImplChallengeDAO;
 import com.esprit.pidev.models.daos.interfaces.implementations.ImplChapitreDAO;
 import com.esprit.pidev.models.daos.interfaces.implementations.ImplCommentaireCoursDAO;
 import com.esprit.pidev.models.daos.interfaces.implementations.ImplCommentaireForumDAO;
+import com.esprit.pidev.models.daos.interfaces.implementations.ImplEpreuveEntrainementDAO;
+import com.esprit.pidev.models.daos.interfaces.implementations.ImplEpreuveFinalDAO;
+import com.esprit.pidev.models.daos.interfaces.implementations.ImplEpreuveObjectifDAO;
 import com.esprit.pidev.models.daos.interfaces.implementations.ImplFormateurDAO;
 import com.esprit.pidev.models.daos.interfaces.implementations.ImplInvitationDAO;
 import com.esprit.pidev.models.daos.interfaces.implementations.ImplLogDAO;
@@ -107,4 +110,16 @@ public interface DAOFactory {
         return new ImplAppreantDAO();
     }
 
+    public static IEpreuveEntrainementDAO getEpreuveEntrainementDAO() {
+        return new ImplEpreuveEntrainementDAO();
+    }
+
+    public static IEpreuveFinalDAO getEpreuveFinalDAO() {
+        return new ImplEpreuveFinalDAO();
+    }
+
+    public static IEpreuveObjectifDAO getEpreuveObjectifDAO() {
+        return new ImplEpreuveObjectifDAO();
+    }
+   
 }

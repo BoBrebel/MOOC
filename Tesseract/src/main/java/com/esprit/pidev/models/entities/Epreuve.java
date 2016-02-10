@@ -9,7 +9,7 @@ package com.esprit.pidev.models.entities;
  *
  * @author Bacem
  */
-public class Epreuve {
+public abstract class Epreuve {
     
     private int id;
     private String codeEpreuve;
