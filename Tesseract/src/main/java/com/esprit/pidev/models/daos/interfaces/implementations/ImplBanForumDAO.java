@@ -62,13 +62,14 @@ public class ImplBanForumDAO implements IBanForumDAO{
 
     @Override
     public boolean modifierBanForum(BanForum banforum) {
-        String query="update ban_forum set id_utilisateur=?,cause=?,date_ban=?,duree=?";
+        String query="update ban_forum set id_utilisateur=?,cause=?,date_ban=?,duree=? where id_ban=?";
         try {
             PreparedStatement pSt = connection.prepareStatement(query);
             pSt.setInt(1, banforum.getIdUtilisateur());
             pSt.setString(2, banforum.getCause());
             pSt.setDate(3, (Date) banforum.getDateBan());
             pSt.setInt(4,banforum.getDuree());
+            pSt.setInt(5,banforum.getIdBan());
             pSt.executeUpdate();
             return true;
         } catch (SQLException ex) {
