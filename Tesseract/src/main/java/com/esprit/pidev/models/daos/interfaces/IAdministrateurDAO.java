@@ -2,7 +2,6 @@
 package com.esprit.pidev.models.daos.interfaces;
 
 import com.esprit.pidev.models.entities.Administrateur;
-import com.esprit.pidev.models.entities.Apprenant;
 import java.sql.SQLException;
 import java.util.List;
 
