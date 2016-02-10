@@ -7,7 +7,6 @@ package com.esprit.pidev.models.daos.interfaces.implementations;
 
 import com.esprit.pidev.models.daos.interfaces.ISessionEpreuveDAO;
 import com.esprit.pidev.models.database.DataSource;
-import com.esprit.pidev.models.entities.SessionCours;
 import com.esprit.pidev.models.entities.SessionEpreuve;
 import java.sql.Connection;
 import java.sql.Date;
@@ -69,7 +68,7 @@ public class ImplSessionEpreuveDAO implements ISessionEpreuveDAO{
     @Override
     public List<SessionEpreuve> getSessionEpreuvebyUserid(int idUser) {
          ArrayList<SessionEpreuve> listeSessionEpreuve = new ArrayList<SessionEpreuve>();
-        String query = "select * from session_cours where id_utilisateur=?";
+        String query = "select * from session_epreuve where id_utilisateur=?";
         
         try {
             PreparedStatement ps = connection.prepareStatement(query);
