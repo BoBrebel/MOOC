@@ -32,7 +32,7 @@ public class ImplLogDAO implements ILogDAO{
     @Override
     public boolean ajouterLog(Log Log) {
         String query = "Insert into log(`id_log`, `id_utilisateur`, `tache`, `date_tache`) "
-                + "values (NULL, ?, ?, ?, ?);";
+                + "values (NULL, ?, ?, ?);";
         try {
             PreparedStatement pSt = connection.prepareStatement(query);
             pSt.setInt(1, Log.getIdUtilisateur());

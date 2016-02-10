@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.esprit.pidev.models.daos.interfaces.implementations;
 
+package com.esprit.pidev.models.daos.interfaces.implementations;
+import static java.lang.System.*;
 import com.esprit.pidev.models.daos.interfaces.IChallengeDAO;
 import com.esprit.pidev.models.database.DataSource;
 import com.esprit.pidev.models.entities.Challenge;
@@ -51,6 +47,7 @@ public class ImplChallengeDAO implements IChallengeDAO{
 
     @Override
     public boolean deleteChallenge(int idChl) {
+       
                 String query="delete from challenge where id_challenge =?";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
