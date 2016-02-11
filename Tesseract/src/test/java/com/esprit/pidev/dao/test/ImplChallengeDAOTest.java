@@ -33,7 +33,7 @@ public class ImplChallengeDAOTest {
     public void tearDown() {
     }
 
-    @Ignore
+   
     @Test
     public void TEST_ADD_CHALLENGE_SHOULD_RETURN_TRUE() {
         Challenge c = new Challenge();

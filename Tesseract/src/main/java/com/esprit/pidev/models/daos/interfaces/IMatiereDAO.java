@@ -1,14 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.esprit.pidev.models.daos.interfaces;
 
-/**
- *
- * @author Choukou_Tracker
- */
+import com.esprit.pidev.models.entities.Cours;
+import com.esprit.pidev.models.entities.Matiere;
+import java.sql.SQLException;
+import java.util.List;
+
 public interface IMatiereDAO {
+
     
+
 }
