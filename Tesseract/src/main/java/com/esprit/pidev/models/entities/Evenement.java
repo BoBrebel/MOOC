@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package com.esprit.pidev.models.entities;
-import java.util.Date;
+import java.sql.Date;
 import java.util.Objects;
 
 /**

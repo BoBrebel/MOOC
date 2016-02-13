@@ -1,5 +1,5 @@
-
 package com.esprit.pidev.models.daos.interfaces.implementations;
+
 import static java.lang.System.*;
 import com.esprit.pidev.models.daos.interfaces.IChallengeDAO;
 import com.esprit.pidev.models.database.DataSource;
@@ -17,26 +17,26 @@ import java.util.List;
  *
  * @author haikal
  */
-public class ImplChallengeDAO implements IChallengeDAO{
+public class ImplChallengeDAO implements IChallengeDAO {
+
     private Connection connection;
 
     public ImplChallengeDAO() {
         connection = DataSource.getInstance().getConnection();
     }
-    
 
     @Override
     public boolean addChallenge(Challenge chl) {
         String query = "Insert into challenge(`id_challenge`, `id_organisation`, `nom`, `description` , `theme` , `date_challenge`) "
-                + "values (NULL, ?, ?, ?, ? ,? , ?);";
+                + "values (NULL, ?, ?, ? ,? , ?)";
         try {
             PreparedStatement pSt = connection.prepareStatement(query);
-            pSt.setInt(1, chl.getIdChallenge());
-            pSt.setInt(2, chl.getIdOrganisation());
-            pSt.setString(3, chl.getNom());
-            pSt.setString(4, chl.getDescription());
-            pSt.setString(5, chl.getTheme());
-            pSt.setDate(6, (Date) chl.getDateChallenge());
+
+            pSt.setInt(1, chl.getIdOrganisation());
+            pSt.setString(2, chl.getNom());
+            pSt.setString(3, chl.getDescription());
+            pSt.setString(4, chl.getTheme());
+            pSt.setDate(5, chl.getDateChallenge());
             pSt.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -47,8 +47,8 @@ public class ImplChallengeDAO implements IChallengeDAO{
 
     @Override
     public boolean deleteChallenge(int idChl) {
-       
-                String query="delete from challenge where id_challenge =?";
+
+        String query = "delete from challenge where id_challenge =?";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, idChl);
@@ -69,15 +69,15 @@ public class ImplChallengeDAO implements IChallengeDAO{
     @Override
     public List<Challenge> displayChallenge() {
         ArrayList<Challenge> liste = new ArrayList<Challenge>();
-        
+
         String query = "select * from challenge";
-        
+
         try {
             Statement statement = connection.createStatement();
             ResultSet resultat = statement.executeQuery(query);
 
             while (resultat.next()) {
-                Challenge ch = new Challenge();                
+                Challenge ch = new Challenge();
                 ch.setIdChallenge(resultat.getInt(1));
                 ch.setIdOrganisation(resultat.getInt(2));
                 ch.setNom(resultat.getString(3));
@@ -98,16 +98,16 @@ public class ImplChallengeDAO implements IChallengeDAO{
     @Override
     public List<Challenge> displayChallengeByOrganisation(int idChl) {
         ArrayList<Challenge> liste = new ArrayList<Challenge>();
-        
+
         String query = "select * from challenge where id_organisation=?";
-        
+
         try {
             PreparedStatement pSt = connection.prepareStatement(query);
-            Statement statement = connection.createStatement();
-            ResultSet resultat = statement.executeQuery(query);
+           pSt.setInt(1, idChl);
+            ResultSet resultat = pSt.executeQuery();
 
             while (resultat.next()) {
-                Challenge ch = new Challenge();                
+                Challenge ch = new Challenge();
                 ch.setIdChallenge(resultat.getInt(1));
                 ch.setIdOrganisation(resultat.getInt(2));
                 ch.setNom(resultat.getString(3));
@@ -134,5 +134,5 @@ public class ImplChallengeDAO implements IChallengeDAO{
     public Challenge getChallengeByNom(String nom) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

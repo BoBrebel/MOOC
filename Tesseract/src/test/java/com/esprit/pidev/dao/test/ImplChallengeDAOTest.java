@@ -33,7 +33,7 @@ public class ImplChallengeDAOTest {
     public void tearDown() {
     }
 
-   
+    @Ignore
     @Test
     public void TEST_ADD_CHALLENGE_SHOULD_RETURN_TRUE() {
         Challenge c = new Challenge();
@@ -43,8 +43,7 @@ public class ImplChallengeDAOTest {
         assertTrue(test);
 
     }
-
-    @Ignore
+  @Ignore
     @Test
     public void TEST_SUPPRIMER_CHALLENGE_SHOULD_RETURN_TRUE() {
 
@@ -56,11 +55,20 @@ public class ImplChallengeDAOTest {
 
     @Ignore
     @Test
+    public void TEST_DISPLAY_CHALLENGE_BY_ID_ORG_SHOULD_RETURN_lST() {
+        IChallengeDAO iChallengeDAO = DAOFactory.getChallengeDAO();
+        List<Challenge> test = iChallengeDAO.displayChallengeByOrganisation(1);
+        assertEquals(1, test.size());
+
+    }
+
+    @Ignore
+    @Test
     public void TEST_DISPLAY_CHALLENGE_SHOULD_RETURN_TRUE() {
 
         IChallengeDAO iChallengeDAO = DAOFactory.getChallengeDAO();
         List<Challenge> test = iChallengeDAO.displayChallenge();
-        assertEquals(0, test.size());
+        assertEquals(1, test.size());
 
     }
 }

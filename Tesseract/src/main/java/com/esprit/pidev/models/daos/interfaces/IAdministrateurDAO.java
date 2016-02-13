@@ -17,4 +17,5 @@ public interface IAdministrateurDAO {
    public List<Administrateur> getAllAdministrateurs()throws SQLException;
    
    public boolean modifierAdministrateur (String login , Administrateur newAdministrateur)throws SQLException;
+   
 }

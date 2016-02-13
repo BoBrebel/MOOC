@@ -11,6 +11,7 @@ import com.esprit.pidev.models.daos.interfaces.implementations.ImplCoursDAO;
 import com.esprit.pidev.models.daos.interfaces.implementations.ImplEpreuveEntrainementDAO;
 import com.esprit.pidev.models.daos.interfaces.implementations.ImplEpreuveFinalDAO;
 import com.esprit.pidev.models.daos.interfaces.implementations.ImplEpreuveObjectifDAO;
+import com.esprit.pidev.models.daos.interfaces.implementations.ImplEvenementDAO;
 import com.esprit.pidev.models.daos.interfaces.implementations.ImplFormateurDAO;
 import com.esprit.pidev.models.daos.interfaces.implementations.ImplInvitationDAO;
 import com.esprit.pidev.models.daos.interfaces.implementations.ImplLogDAO;
@@ -72,8 +73,8 @@ public interface DAOFactory {
         return new ImplLogDAO();
     }
 
-    public static IAdministrateurDAO getMatiereDAO() {
-        return new ImplAdministrateurDAO();
+    public static IMatiereDAO getMatiereDAO() {
+        return new ImplMatiereDAO();
     }
 
     public static INotificationDAO getNotificationDAO() {
@@ -128,6 +129,8 @@ public interface DAOFactory {
         return new ImplCoursDAO();
     }
 
-  
+  public static IEvenementDAO getEvenementDAO() {
+        return new ImplEvenementDAO();
+    }
 
 }

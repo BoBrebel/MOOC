@@ -1,9 +1,165 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.esprit.pidev.models.daos.interfaces.implementations;
 
 import com.esprit.pidev.models.daos.interfaces.ICoursDAO;
+import com.esprit.pidev.models.database.DataSource;
 
+import com.esprit.pidev.models.entities.Cours;
+import com.esprit.pidev.models.entities.Matiere;
+import java.sql.Connection;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
-public class ImplCoursDAO implements ICoursDAO{
-    
+/**
+ *
+ * @author Sameh
+ */
+public class ImplCoursDAO implements ICoursDAO {
+
+    private Connection cnx;
+
+    public ImplCoursDAO() {
+        cnx = DataSource.getInstance().getConnection();
+    }
+
+    @Override
+    public boolean AjouterCours(Cours c1, Matiere m1) throws SQLException {
+
+        String req = "insert into cours (id_cours,nom,difficulte,description,id_matiere,badge,affiche) values (?,?,?,?,?,?,?)";
+        PreparedStatement ps = cnx.prepareStatement(req);
+        ps.setInt(1, c1.getIdCours());
+        ps.setString(2, c1.getNomCours());
+        ps.setObject(3, c1.getDifficulte());
+        ps.setString(4, c1.getDescriptionCours());
+        ps.setInt(5, m1.getIdMatiere());
+        ps.setString(6, c1.getBadge());
+        ps.setString(7, c1.getAffiche());
+        int ajout = ps.executeUpdate();
+        ps.close();
+        return (ajout == 1);
+
+    }
+
+    @Override
+    public boolean deleteCoursById(int idCours) throws SQLException {
+        String requete = "delete from cours where id_cours=?";
+
+        PreparedStatement ps = cnx.prepareStatement(requete);
+        ps.setInt(1, idCours);
+        ps.executeUpdate();
+        int delete = ps.executeUpdate();
+        ps.close();
+        return (delete == 1);
+    }
+
+    @Override
+    public List<Cours> findAll() throws SQLException {
+        List<Cours> listeCours = new ArrayList<>();
+        String requete = "select * from cours";
+
+        Statement statement = cnx.createStatement();
+        ResultSet resultat = statement.executeQuery(requete);
+
+        while (resultat.next()) {
+            Cours cours = new Cours();
+            cours.setIdCours(resultat.getInt(1));
+            cours.setNomCours(resultat.getString(3));
+            cours.setDescriptionCours(resultat.getString(5));
+
+            listeCours.add(cours);
+        }
+        if (Objects.nonNull(listeCours)) {
+            return listeCours;
+        }
+
+        throw new UnsupportedOperationException();
+
+    }
+
+    @Override
+    public Cours findCoursById(int idCours) throws SQLException {
+        Cours cours = new Cours();
+        String requete = "select * from cours where id_cours=?";
+
+        PreparedStatement ps = cnx.prepareStatement(requete);
+        ps.setInt(1, idCours);
+        ResultSet resultat = ps.executeQuery();
+        while (resultat.next()) {
+            cours.setIdCours(resultat.getInt(1));
+            cours.setNomCours(resultat.getString(3));
+            cours.setDescriptionCours(resultat.getString(5));
+        }
+        if (Objects.nonNull(cours)) {
+            return cours;
+        }
+
+        throw new UnsupportedOperationException();
+
+    }
+
+    @Override
+    public List<Cours> findCoursByIdFromateur(int idFormateur) throws SQLException {
+        List<Cours> listeCours = new ArrayList<>();
+        String requete = "select * from cours where id_utilisateur=?";
+        PreparedStatement ps = cnx.prepareStatement(requete);
+        ps.setInt(1, idFormateur);
+        ResultSet resultat = ps.executeQuery();
+
+        while (resultat.next()) {
+            Cours cours = new Cours();
+            cours.setIdCours(resultat.getInt(1));
+            cours.setNomCours(resultat.getString(2));
+            listeCours.add(cours);
+        }
+        if (Objects.nonNull(listeCours)) {
+            return listeCours;
+        }
+
+        throw new UnsupportedOperationException();
+
+    }
+
+    @Override
+    public boolean updateCours(Cours c1, Matiere m1) throws SQLException {
+        String requete = "update cours set nom =?,description=? where id_matiere=?";
+
+        PreparedStatement ps = cnx.prepareStatement(requete);
+        ps.setString(1, m1.getNomMatiere());
+        ps.setString(2, m1.getDescriptionMatiere());
+        ps.setInt(3, m1.getIdMatiere());
+
+        int update = ps.executeUpdate();
+        ps.close();
+        return (update == 1);
+    }
+
+    @Override
+    public List<Cours> findCoursByMatiere(Matiere m1) throws SQLException {
+        List<Cours> listeCours = new ArrayList<>();
+        String requete = "select * from cours where id_matiere=?";
+
+        PreparedStatement ps = cnx.prepareStatement(requete);
+        ps.setInt(1, m1.getIdMatiere());
+        ResultSet resultat = ps.executeQuery();
+
+        while (resultat.next()) {
+            Cours cours = new Cours();
+            cours.setIdCours(resultat.getInt(1));
+            cours.setNomCours(resultat.getString(2));
+            listeCours.add(cours);
+        }
+        if (Objects.nonNull(listeCours)) {
+            return listeCours;
+        }
+
+        throw new UnsupportedOperationException();
+
+    }
+
 }

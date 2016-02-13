@@ -1,21 +1,22 @@
 package com.esprit.pidev.models.daos.interfaces;
 import com.esprit.pidev.models.entities.Evenement;
+import java.sql.SQLException;
 import java.util.List;
 
 
 public interface IEvenementDAO {
     
-    public boolean addEvenement(Evenement evn);
+    public boolean addEvenement(Evenement evn) throws SQLException;
     
-    public boolean deleteEvenement(int idEvn);
+    public boolean deleteEvenement(int idEvn) throws SQLException;
     
-    boolean updateEvenement(Evenement evn);
+    boolean updateEvenement(Evenement evn)throws SQLException;
         
-    public List<Evenement> displayEvenement();
+    public List<Evenement> displayEvenement()throws SQLException;
     
-    public List<Evenement> displayChallengeByEvenement(int idEvn);
+    public List<Evenement> displayByIdOrganisation(int idOrg)throws SQLException;
     
-    public Evenement getEvenementByid(int id);
+    public Evenement getEvenementByid(int id)throws SQLException;
     
-    public Evenement getEvenementByNom(String nom);
+    public Evenement getEvenementByNom(String nom)throws SQLException;
 }

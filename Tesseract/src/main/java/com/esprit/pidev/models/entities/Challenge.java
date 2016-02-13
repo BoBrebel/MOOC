@@ -1,7 +1,7 @@
 
 package com.esprit.pidev.models.entities;
 
-import java.util.Date;
+import java.sql.Date;
 
 
 public class Challenge {
