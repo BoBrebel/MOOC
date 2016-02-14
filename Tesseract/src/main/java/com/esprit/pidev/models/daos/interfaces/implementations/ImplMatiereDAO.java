@@ -33,7 +33,7 @@ public class ImplMatiereDAO implements IMatiereDAO{
     @Override
     public boolean AjouterMatiere(Matiere m1) throws SQLException{
         
-          String req = "insert into matiere (id_matiere,nom,description) values (?,?,?)";
+          String req = "insert into matiere (id ,nom,description) values (?,?,?)";
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setInt(1,m1.getIdMatiere());
             ps.setString(2,m1.getNomMatiere());
@@ -61,7 +61,7 @@ public class ImplMatiereDAO implements IMatiereDAO{
  @Override
     public boolean deleteMatiereById(int idMatiere) throws SQLException {
           int delete;
-        String requete = "delete from matiere where id_matiere='"+idMatiere+"'";
+        String requete = "delete from matiere where id='"+idMatiere+"'";
        if (cnx==null){
            delete=0;
        }
@@ -73,7 +73,7 @@ public class ImplMatiereDAO implements IMatiereDAO{
 
     @Override
     public boolean updateMatiere(Matiere m1,int idMatiere) throws SQLException{
-         String requete = "update matiere set description=? where id_matiere=?";
+         String requete = "update matiere set description=? where id=?";
         
             PreparedStatement ps = cnx.prepareStatement(requete);
             
@@ -114,7 +114,7 @@ public class ImplMatiereDAO implements IMatiereDAO{
     public Matiere findMatiereById(int idMatiere) throws SQLException{
        
     Matiere matiere = new Matiere();
-        String requete = "select * from matiere where id_matiere=?";
+        String requete = "select * from matiere where id=?";
         
             PreparedStatement ps = cnx.prepareStatement(requete);
             ps.setInt(1, idMatiere);
@@ -159,7 +159,7 @@ public class ImplMatiereDAO implements IMatiereDAO{
     @Override
     public List<Cours> affichageCoursByMatiere(int idMatiere) throws SQLException{
         List<Cours> listeCours = new ArrayList<>();
-        String requete = "select * from cours where id_matiere=?";
+        String requete = "select * from cours where id=?";
        
           PreparedStatement ps = cnx.prepareStatement(requete);
             ps.setInt(1, idMatiere);

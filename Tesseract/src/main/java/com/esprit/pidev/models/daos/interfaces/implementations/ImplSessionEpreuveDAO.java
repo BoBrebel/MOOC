@@ -30,7 +30,7 @@ public class ImplSessionEpreuveDAO implements ISessionEpreuveDAO{
 
     @Override
     public boolean ajouterSessionEpreuve(SessionEpreuve sessionEpreuve) {
-        String query = "Insert into session_epreuve(`id_utilisateur`, `id_epreuve`,`note`,`nbr_tentative`,`date_session`) "
+        String query = "Insert into session_epreuve(`id_utilisateur`, `id_epreuve`,`note`,`nbr_tentative`,`date`) "
                 + "values (?, ?, ?, ?, ?);";
         try {
             PreparedStatement pSt = connection.prepareStatement(query);
@@ -49,7 +49,7 @@ public class ImplSessionEpreuveDAO implements ISessionEpreuveDAO{
 
     @Override
     public boolean modifierSessionEpreuve(SessionEpreuve sessionEpreuve) {
-        String requete = "update session_epreuve set note=?, nbr_tentative=?, date_session=? where id_utilisateur=? and id_epreuve=?,";
+        String requete = "update session_epreuve set note=?, nbr_tentative=?, date=? where id_utilisateur=? and id_epreuve=?,";
         try {
             PreparedStatement ps = connection.prepareStatement(requete);
             ps.setFloat(1, sessionEpreuve.getNote());

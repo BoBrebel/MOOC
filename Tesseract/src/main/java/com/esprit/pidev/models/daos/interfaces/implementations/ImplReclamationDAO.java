@@ -12,6 +12,7 @@ import com.esprit.pidev.models.entities.Reclamation;
 import com.esprit.pidev.models.enums.Etat;
 import com.esprit.pidev.models.enums.Role;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,13 +31,13 @@ public class ImplReclamationDAO implements IReclamationDAO {
 
         Connection connection = DataSource.getInstance().getConnection();
 
-        String requete = "insert into reclamation (id_utilisateur,sujet,description,etat,date_reclamation) values (?,?,?,?,?)";
+        String requete = "insert into reclamation (id_utilisateur,sujet,description,etat,date) values (?,?,?,?,?)";
         PreparedStatement ps = connection.prepareStatement(requete);
         ps.setInt(1, idUtilisateur);
         ps.setString(2, reclamation.getSujet());
         ps.setString(3, reclamation.getDescription());
         ps.setString(4, String.valueOf(Etat.ATT));
-        ps.setString(5, reclamation.getDateReclamation());
+        ps.setDate(5, (Date) reclamation.getDateReclamation());
 
         int resultat = ps.executeUpdate();
         ps.close();
@@ -59,7 +60,7 @@ public class ImplReclamationDAO implements IReclamationDAO {
             reclamation.setSujet(rs.getString(3));
             reclamation.setDescription(rs.getString(4));
             reclamation.setEtat(Etat.valueOf(rs.getString(5)));
-            reclamation.setDateReclamation(rs.getString(6));
+            reclamation.setDateReclamation(rs.getDate(6));
             list.add(reclamation);
         }
         ps.close();
@@ -70,12 +71,12 @@ public class ImplReclamationDAO implements IReclamationDAO {
     public boolean modifierReclamation(int idReclamation, Reclamation newReclamation) throws SQLException {
         Connection connection = DataSource.getInstance().getConnection();
 
-        String requete = "update reclamation set sujet=? , description=?,etat=?,date_reclamation=?   where id_reclamation = ?";
+        String requete = "update reclamation set sujet=? , description=?,etat=?,date=?   where id= ?";
         PreparedStatement ps = connection.prepareStatement(requete);
         ps.setString(1, newReclamation.getSujet());
         ps.setString(2, newReclamation.getDescription());
         ps.setString(3, newReclamation.getEtat().name());
-        ps.setString(4, newReclamation.getDateReclamation());
+        ps.setDate(4, (Date) newReclamation.getDateReclamation());
         ps.setInt(5, idReclamation);
         int resultat = ps.executeUpdate();
         ps.close();

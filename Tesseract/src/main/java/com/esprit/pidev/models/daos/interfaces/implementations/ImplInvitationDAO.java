@@ -19,7 +19,7 @@ public class ImplInvitationDAO implements IInvitationDAO {
     public boolean createInvitation(Invitation i) throws SQLException {
 
         Connection connection = DataSource.getInstance().getConnection();
-        String req = "insert into invitation ( id_utilisateur, id_organisation, sens,etat,date_invitation) values (?,?,?,?,?)";
+        String req = "insert into invitation ( id_utilisateur, id_organisation, sens,etat,date) values (?,?,?,?,?)";
         PreparedStatement preparedStatement = connection.prepareStatement(req);
         preparedStatement.setInt(1, i.getIdUtilisateur());
         preparedStatement.setInt(2, i.getIdOrganisation());

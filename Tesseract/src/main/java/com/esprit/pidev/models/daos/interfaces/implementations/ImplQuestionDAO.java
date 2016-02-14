@@ -33,7 +33,7 @@ public class ImplQuestionDAO implements IQuestionDAO{
     @Override
     public boolean createQuestion(Question question) {
         try {
-            String request="insert into questions(question, idEpreuve) values (?,?)";
+            String request="insert into questions(question, id_epreuve) values (?,?)";
             pst = connection.prepareStatement(request);
             pst.setString(1, question.getQuestion());
             pst.setInt(2, question.getIdEpreuve());
@@ -64,7 +64,7 @@ public class ImplQuestionDAO implements IQuestionDAO{
     @Override
     public boolean updateQuestion(Question question, int id) {
         try {
-            String request="update questions set question=?, idEpreuve=? where id=?";
+            String request="update questions set question=?, id_epreuve=? where id=?";
             pst = connection.prepareStatement(request);
             pst.setString(1, question.getQuestion());
             pst.setInt(2, question.getIdEpreuve());
@@ -87,7 +87,7 @@ public class ImplQuestionDAO implements IQuestionDAO{
             rS = pst.executeQuery(request);
             rS.next();
             question.setId(rS.getInt("id"));
-            question.setIdEpreuve(rS.getInt("idEpreuve"));
+            question.setIdEpreuve(rS.getInt("id_epreuve"));
             question.setQuestion(rS.getString("question"));
         } catch (SQLException ex) {
             Logger.getLogger(ImplQuestionDAO.class.getName()).log(Level.SEVERE, null, ex);

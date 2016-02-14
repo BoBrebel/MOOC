@@ -34,12 +34,11 @@ public class ImplEpreuveFinalDAO implements IEpreuveFinalDAO {
     @Override
     public boolean createEpreuveFinal(EpreuveFinal epreuveFinal) {
         try {
-            String request="insert into epreuves(difficulte, duree, code, type) values (?,?,?,?)";
+            String request="insert into epreuves(difficulte, duree,type) values (?,?,?)";
             pst = connection.prepareStatement(request);
             pst.setString(1, epreuveFinal.getDifficulte());
             pst.setInt(2, epreuveFinal.getDureeExamen());
-            pst.setString(3, epreuveFinal.getCodeEpreuve());
-            pst.setString(4, TYPE);
+            pst.setString(3, TYPE);
             
             int result = pst.executeUpdate();
             pst.close();
@@ -68,12 +67,11 @@ public class ImplEpreuveFinalDAO implements IEpreuveFinalDAO {
     @Override
     public boolean updateEpreuveFinal(EpreuveFinal epreuveFinal, int id) {
         try {
-            String request="update epreuves set difficulte=?, code=?, duree=? where id=?";
+            String request="update epreuves set difficulte=?, duree=? where id=?";
             pst = connection.prepareStatement(request);
             pst.setString(1, epreuveFinal.getDifficulte());
-            pst.setString(2, epreuveFinal.getCodeEpreuve());
-            pst.setInt(3, epreuveFinal.getDureeExamen());
-            pst.setInt(4, id);
+            pst.setInt(2, epreuveFinal.getDureeExamen());
+            pst.setInt(3, id);
             int result = pst.executeUpdate();
             pst.close();
             return result==1;
@@ -91,7 +89,6 @@ public class ImplEpreuveFinalDAO implements IEpreuveFinalDAO {
             rS = pst.executeQuery(request);
             rS.next();
             epreuveFinal.setId(rS.getInt("id"));
-            epreuveFinal.setCodeEpreuve(rS.getString("code"));
             epreuveFinal.setDifficulte(rS.getString("difficulte"));
             epreuveFinal.setDureeExamen(rS.getInt("duree"));
         } catch (SQLException ex) {
@@ -108,7 +105,7 @@ public class ImplEpreuveFinalDAO implements IEpreuveFinalDAO {
             pst=connection.prepareStatement(request);
             rS=pst.executeQuery();
             while(rS.next()){
-                EpreuveFinal e=new EpreuveFinal(rS.getInt(3),rS.getInt(1),rS.getString("code"),rS.getString("difficulte"));
+                EpreuveFinal e=new EpreuveFinal(rS.getInt(5),rS.getInt(1),rS.getString("difficulte"));
                 epreuves.add(e);
             }
         } catch (SQLException ex) {

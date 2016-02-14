@@ -18,7 +18,7 @@ public class ImplNotificationDAO implements INotificationDAO {
     public boolean createNotification(Notification notification) throws SQLException {
 
         Connection connection = DataSource.getInstance().getConnection();
-        String req = "insert into notification(id_notification , id_utilisateur, notification , date_notification) values (?,?,?,?)";
+        String req = "insert into notification(id, id_utilisateur, notification , date) values (?,?,?,?)";
         PreparedStatement preparedStatement = connection.prepareStatement(req);
         preparedStatement.setInt(1, notification.getIdNotification());
         preparedStatement.setInt(2, notification.getIdUtilisateur());
@@ -35,7 +35,7 @@ public class ImplNotificationDAO implements INotificationDAO {
     public List<Notification> displayNotificationByUserId(int idUtilisateur) throws SQLException {
         List<Notification> listN = new ArrayList<Notification>();
         Connection connection = DataSource.getInstance().getConnection();
-        String req = "select * from notification where id_utilisateur =" + idUtilisateur;
+        String req = "select * from notification where id =" + idUtilisateur;
 
         Statement st = connection.createStatement();
         ResultSet resultat = st.executeQuery(req);
@@ -57,7 +57,7 @@ public class ImplNotificationDAO implements INotificationDAO {
     public List<Notification> displayNotificationByDate(Date date) throws SQLException {
         List<Notification> listN = new ArrayList<Notification>();
         Connection connection = DataSource.getInstance().getConnection();
-        String req = "select * from notification where date_notification ='" +date+" 00:00:00'" ;
+        String req = "select * from notification where date ='" +date+" 00:00:00'" ;
 
         Statement st = connection.createStatement();
         ResultSet resultat = st.executeQuery(req);

@@ -9,6 +9,7 @@ import com.esprit.pidev.models.daos.interfaces.DAOFactory;
 import com.esprit.pidev.models.daos.interfaces.IReclamationDAO;
 import com.esprit.pidev.models.entities.Reclamation;
 import com.esprit.pidev.models.enums.Etat;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 import org.junit.After;
@@ -68,7 +69,7 @@ public class ImplReclamationDAOTest {
 
         IReclamationDAO iReclamationDAO = DAOFactory.getReclamationDAO();
 
-        boolean result = iReclamationDAO.modifierReclamation(1, new Reclamation(14, "oop", "sujett", Etat.ACC, "12-12-12"));
+        boolean result = iReclamationDAO.modifierReclamation(1, new Reclamation(14, "oop", "sujett", Etat.ACC, new Date(100)));
         assertTrue(result);
     }
 

@@ -12,12 +12,10 @@ package com.esprit.pidev.models.entities;
 public abstract class Epreuve {
     
     private int id;
-    private String codeEpreuve;
     private String difficulte;
 
-    public Epreuve(int id, String codeEpreuve, String difficulte) {
+    public Epreuve(int id, String difficulte) {
         this.id = id;
-        this.codeEpreuve = codeEpreuve;
         this.difficulte = difficulte;
     }
 
@@ -30,14 +28,6 @@ public abstract class Epreuve {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getCodeEpreuve() {
-        return codeEpreuve;
-    }
-
-    public void setCodeEpreuve(String codeEpreuve) {
-        this.codeEpreuve = codeEpreuve;
     }
 
     public String getDifficulte() {
@@ -69,7 +59,7 @@ public abstract class Epreuve {
 
     @Override
     public String toString() {
-        return "Epreuve{" + "codeEpreuve=" + codeEpreuve + ", difficulte=" + difficulte + '}';
+        return "Epreuve{" +", difficulte=" + difficulte + '}';
     }
     
     

@@ -35,11 +35,10 @@ public class ImplEpreuveObjectifDAO implements IEpreuveObjectifDAO {
     @Override
     public boolean createEpreuveObjectif(EpreuveObjectif epreuveObjectif) {
         try {
-            String request="insert into epreuves(difficulte, code, type) values (?,?)";
+            String request="insert into epreuves(difficulte,type) values (?,?)";
             pst = connection.prepareStatement(request);
             pst.setString(1, epreuveObjectif.getDifficulte());
-            pst.setString(2, epreuveObjectif.getCodeEpreuve());
-            pst.setString(3, TYPE);
+            pst.setString(2, TYPE);
             
             int result = pst.executeUpdate();
             pst.close();
@@ -67,11 +66,10 @@ public class ImplEpreuveObjectifDAO implements IEpreuveObjectifDAO {
     @Override
     public boolean updateEpreuveObjectif(EpreuveObjectif epreuveObjectif, int id) {
         try {
-            String request="update epreuves set difficulte=?, code=? where id=?";
+            String request="update epreuves set difficulte=? where id=?";
             pst = connection.prepareStatement(request);
             pst.setString(1, epreuveObjectif.getDifficulte());
-            pst.setString(2, epreuveObjectif.getCodeEpreuve());
-            pst.setInt(4, id);
+            pst.setInt(2, id);
             int result = pst.executeUpdate();
             pst.close();
             return result==1;
@@ -85,11 +83,10 @@ public class ImplEpreuveObjectifDAO implements IEpreuveObjectifDAO {
     public EpreuveObjectif searchEpreuveObjectif(int id) {
         EpreuveObjectif epreuveObjectif = new EpreuveObjectif();
         try {
-            String request="select * fromepreuves where id=?";
+            String request="select * from epreuves where id=?";
             rS = pst.executeQuery(request);
             rS.next();
             epreuveObjectif.setId(rS.getInt("id"));
-            epreuveObjectif.setCodeEpreuve(rS.getString("code"));
             epreuveObjectif.setDifficulte(rS.getString("difficulte"));
         } catch (SQLException ex) {
             Logger.getLogger(ImplEpreuveObjectifDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -105,7 +102,7 @@ public class ImplEpreuveObjectifDAO implements IEpreuveObjectifDAO {
             pst=connection.prepareStatement(request);
             rS=pst.executeQuery();
             while(rS.next()){
-                EpreuveObjectif e=new EpreuveObjectif(rS.getInt(1),rS.getString("code"),rS.getString("difficulte"));
+                EpreuveObjectif e=new EpreuveObjectif(rS.getInt(1),rS.getString("difficulte"));
                 epreuves.add(e);
             }
         } catch (SQLException ex) {

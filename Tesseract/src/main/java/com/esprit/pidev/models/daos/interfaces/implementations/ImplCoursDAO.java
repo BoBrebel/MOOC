@@ -31,7 +31,7 @@ public class ImplCoursDAO implements ICoursDAO {
     @Override
     public boolean AjouterCours(Cours c1, Matiere m1) throws SQLException {
 
-        String req = "insert into cours (id_cours,nom,difficulte,description,id_matiere,badge,affiche) values (?,?,?,?,?,?,?)";
+        String req = "insert into cours (id,nom,difficulte,description,id_matiere,badge,affiche) values (?,?,?,?,?,?,?)";
         PreparedStatement ps = cnx.prepareStatement(req);
         ps.setInt(1, c1.getIdCours());
         ps.setString(2, c1.getNomCours());
@@ -48,7 +48,7 @@ public class ImplCoursDAO implements ICoursDAO {
 
     @Override
     public boolean deleteCoursById(int idCours) throws SQLException {
-        String requete = "delete from cours where id_cours=?";
+        String requete = "delete from cours where id=?";
 
         PreparedStatement ps = cnx.prepareStatement(requete);
         ps.setInt(1, idCours);
@@ -81,11 +81,11 @@ public class ImplCoursDAO implements ICoursDAO {
         throw new UnsupportedOperationException();
 
     }
-
+// problème bacem
     @Override
     public Cours findCoursById(int idCours) throws SQLException {
         Cours cours = new Cours();
-        String requete = "select * from cours where id_cours=?";
+        String requete = "select * from cours where id=?";
 
         PreparedStatement ps = cnx.prepareStatement(requete);
         ps.setInt(1, idCours);
@@ -102,7 +102,7 @@ public class ImplCoursDAO implements ICoursDAO {
         throw new UnsupportedOperationException();
 
     }
-
+// problème  bacem
     @Override
     public List<Cours> findCoursByIdFromateur(int idFormateur) throws SQLException {
         List<Cours> listeCours = new ArrayList<>();

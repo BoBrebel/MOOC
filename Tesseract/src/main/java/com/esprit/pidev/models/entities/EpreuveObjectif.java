@@ -12,8 +12,8 @@ package com.esprit.pidev.models.entities;
  */
 public class EpreuveObjectif extends Epreuve{
 
-    public EpreuveObjectif(int id, String codeEpreuve, String difficulte) {
-        super(id, codeEpreuve, difficulte);
+    public EpreuveObjectif(int id, String difficulte) {
+        super(id, difficulte);
     }
 
     public EpreuveObjectif() {

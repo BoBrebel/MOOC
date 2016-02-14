@@ -35,7 +35,7 @@ public class ImplEvenementDAO implements IEvenementDAO {
 
     @Override
     public boolean addEvenement(Evenement evn) throws SQLException {
-        String query = "Insert into evenement(`id_evenement`, `id_organisation`, `nom`, `description` , `nbr_max` , `affiche` , `date_evenement`) "
+        String query = "Insert into evenement(`id`, `id_organisation`, `nom`, `description` , `nbr_max` , `affiche` , `date`) "
                 + "values (NULL, ?, ?, ? ,? ,?,?);";
         try {
             PreparedStatement pSt = connection.prepareStatement(query);
@@ -56,7 +56,7 @@ public class ImplEvenementDAO implements IEvenementDAO {
 
     @Override
     public boolean deleteEvenement(int idEvn) throws SQLException {
-        String query = "delete from evenement where id_evenement =?";
+        String query = "delete from evenement where id =?";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, idEvn);
@@ -137,7 +137,7 @@ public class ImplEvenementDAO implements IEvenementDAO {
     @Override
     public Evenement getEvenementByid(int id)throws SQLException {
 
-        String query = "select * from evenement where id_evenement = ?";
+        String query = "select * from evenement where id = ?";
 
         PreparedStatement ps = connection.prepareStatement(query);
         ResultSet resultat = ps.executeQuery();

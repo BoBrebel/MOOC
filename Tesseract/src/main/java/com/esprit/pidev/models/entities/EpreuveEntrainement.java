@@ -11,27 +11,18 @@ package com.esprit.pidev.models.entities;
  */
 public class EpreuveEntrainement extends Epreuve{
 
-    protected int nombreTentative;
 
-    public EpreuveEntrainement(int nombreTentative, int id, String codeEpreuve, String difficulte) {
-        super(id, codeEpreuve, difficulte);
-        this.nombreTentative = nombreTentative;
+    public EpreuveEntrainement(int id, String difficulte) {
+        super(id, difficulte);
     }
 
     public EpreuveEntrainement() {
     }
 
-    public int getNombreTentative() {
-        return nombreTentative;
-    }
-
-    public void setNombreTentative(int nombreTentative) {
-        this.nombreTentative = nombreTentative;
-    }
 
     @Override
     public String toString() {
-        return "EpreuveEntrainement{" + super.toString() + "nombreTentative=" + nombreTentative + '}';
+        return "EpreuveEntrainement{" + super.toString()+ '}';
     }
     
     

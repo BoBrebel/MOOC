@@ -30,7 +30,7 @@ public class ImplSessionCoursDAO implements ISessionCoursDAO{
 
     @Override
     public boolean ajouterSessionCours(SessionCours SessionCours) {
-        String query = "Insert into session_cours(`id_utilisateur`, `id_cours`,`date_session`) "
+        String query = "Insert into session_cours(`id_utilisateur`, `id_cours`,`date`) "
                 + "values (?, ?, ?);";
         try {
             PreparedStatement pSt = connection.prepareStatement(query);
@@ -96,7 +96,7 @@ public class ImplSessionCoursDAO implements ISessionCoursDAO{
     @Override
     public List<SessionCours> getSessionCoursbyDate(Date date) {
         ArrayList<SessionCours> listeSessionCours = new ArrayList<SessionCours>();
-        String query = "select * from session_cours where date_session=?";
+        String query = "select * from session_cours where date=?";
         
         try {
             PreparedStatement ps = connection.prepareStatement(query);

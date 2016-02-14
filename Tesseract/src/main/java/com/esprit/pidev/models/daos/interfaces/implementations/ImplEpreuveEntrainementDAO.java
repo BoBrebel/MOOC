@@ -35,12 +35,10 @@ public class ImplEpreuveEntrainementDAO implements IEpreuveEntrainementDAO{
     @Override
     public boolean createEpreuveEntrainement(EpreuveEntrainement epreuveEntrainement) {
         try {
-            String request="insert into epreuves(difficulte, nbTentative, code, type) values (?,?,?,?)";
+            String request="insert into epreuves(difficulte, type) values (?,?)";
             pst = connection.prepareStatement(request);
             pst.setString(1, epreuveEntrainement.getDifficulte());
-            pst.setInt(2, epreuveEntrainement.getNombreTentative());
-            pst.setString(3, epreuveEntrainement.getCodeEpreuve());
-            pst.setString(4, TYPE);
+            pst.setString(2, TYPE);
             
             int result = pst.executeUpdate();
             pst.close();
@@ -69,12 +67,10 @@ public class ImplEpreuveEntrainementDAO implements IEpreuveEntrainementDAO{
     @Override
     public boolean updateEpreuveEntrainement(EpreuveEntrainement epreuveEntrainement, int id) {
         try {
-            String request="update epreuves set difficulte=?, code=?, nbTentative=? where id=?";
+            String request="update epreuves set difficulte=? where id=?";
             pst = connection.prepareStatement(request);
             pst.setString(1, epreuveEntrainement.getDifficulte());
-            pst.setString(2, epreuveEntrainement.getCodeEpreuve());
-            pst.setInt(3, epreuveEntrainement.getNombreTentative());
-            pst.setInt(4, id);
+            pst.setInt(2, id);
             int result = pst.executeUpdate();
             pst.close();
             return result==1;
@@ -92,9 +88,7 @@ public class ImplEpreuveEntrainementDAO implements IEpreuveEntrainementDAO{
             rS = pst.executeQuery(request);
             rS.next();
             epreuveEntrainement.setId(rS.getInt("id"));
-            epreuveEntrainement.setCodeEpreuve(rS.getString("code"));
             epreuveEntrainement.setDifficulte(rS.getString("difficulte"));
-            epreuveEntrainement.setNombreTentative(rS.getInt("nbTentative"));
         } catch (SQLException ex) {
             Logger.getLogger(ImplEpreuveEntrainementDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -109,7 +103,7 @@ public class ImplEpreuveEntrainementDAO implements IEpreuveEntrainementDAO{
             pst=connection.prepareStatement(request);
             rS=pst.executeQuery();
             while(rS.next()){
-                EpreuveEntrainement e=new EpreuveEntrainement(rS.getInt(4),rS.getInt(1),rS.getString("code"),rS.getString("difficulte"));
+                EpreuveEntrainement e=new EpreuveEntrainement(rS.getInt(1),rS.getString("difficulte"));
                 epreuves.add(e);
             }
         } catch (SQLException ex) {

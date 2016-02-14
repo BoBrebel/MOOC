@@ -28,7 +28,7 @@ public class ImplAdministrateurDAO implements IAdministrateurDAO {
     public boolean ajouterAdministrateur(Administrateur administrateur) throws SQLException {
         Connection connection = DataSource.getInstance().getConnection();
         System.out.println(administrateur.getNomUtilisateur());
-        String requete = "insert into utilisateur (nom_utilisateur,mot_de_passe,nom,prenom,date_naissance,tel,adresse,mail,photo,role,mail_sercours) values (?,?,?,?,?,?,?,?,?,?,?)";
+        String requete = "insert into utilisateur (pseudo,mdp,nom,prenom,date_naissance,telephone,adresse,mail,photo,role,mail_sercours) values (?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement ps = connection.prepareStatement(requete);
         ps.setString(1, administrateur.getNomUtilisateur());
         ps.setString(2, administrateur.getMotDePass());
@@ -50,7 +50,7 @@ public class ImplAdministrateurDAO implements IAdministrateurDAO {
     @Override
     public Administrateur getAdministrateurByLogin(String login) throws SQLException {
         Connection connection = DataSource.getInstance().getConnection();
-        String requete = "select * from utilisateur where nom_utilisateur like ?";
+        String requete = "select * from utilisateur where pseudo like ?";
         PreparedStatement ps = connection.prepareCall(requete);
         ps.setString(1, login);
         ResultSet rs = ps.executeQuery();
@@ -77,7 +77,7 @@ public class ImplAdministrateurDAO implements IAdministrateurDAO {
     @Override
     public boolean supprimerAdministrateurByLogin(String login) throws SQLException {
         Connection connection = DataSource.getInstance().getConnection();
-        String requete = "delete from utilisateur where nom_utilisateur like ?";
+        String requete = "delete from utilisateur where pseudo like ?";
         PreparedStatement ps = connection.prepareCall(requete);
         ps.setString(1, login);
         int reslt = ps.executeUpdate();
@@ -117,7 +117,7 @@ public class ImplAdministrateurDAO implements IAdministrateurDAO {
     public boolean modifierAdministrateur(String login, Administrateur newAdministrateur) throws SQLException {
         Connection connection = DataSource.getInstance().getConnection();
 
-        String requete = "update utilisateur set nom_utilisateur=?,mot_de_passe=?,nom=?,prenom=?,date_naissance=?,tel=?,adresse=?,mail=?,photo=?,role=?,mail_secours=? where nom_utilisateur like ?";
+        String requete = "update utilisateur set pseudo=?,mdp=?,nom=?,prenom=?,date_naissance=?,telephone=?,adresse=?,mail=?,photo=?,role=?,mail_secours=? where pseudo like ?";
         PreparedStatement ps = connection.prepareStatement(requete);
         ps.setString(1, newAdministrateur.getNomUtilisateur());
         ps.setString(2, newAdministrateur.getMotDePass());

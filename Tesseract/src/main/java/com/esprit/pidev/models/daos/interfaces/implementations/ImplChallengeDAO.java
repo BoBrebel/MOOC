@@ -27,7 +27,7 @@ public class ImplChallengeDAO implements IChallengeDAO {
 
     @Override
     public boolean addChallenge(Challenge chl) {
-        String query = "Insert into challenge(`id_challenge`, `id_organisation`, `nom`, `description` , `theme` , `date_challenge`) "
+        String query = "Insert into challenge(`id`, `id_organisation`, `nom`, `description` , `theme` , `date`) "
                 + "values (NULL, ?, ?, ? ,? , ?)";
         try {
             PreparedStatement pSt = connection.prepareStatement(query);
@@ -48,7 +48,7 @@ public class ImplChallengeDAO implements IChallengeDAO {
     @Override
     public boolean deleteChallenge(int idChl) {
 
-        String query = "delete from challenge where id_challenge =?";
+        String query = "delete from challenge where id =?";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, idChl);

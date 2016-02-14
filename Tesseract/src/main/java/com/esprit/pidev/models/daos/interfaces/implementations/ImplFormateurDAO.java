@@ -29,7 +29,7 @@ public class ImplFormateurDAO implements IFormateurDAO {
     public boolean ajouterFormateur(Formateur formateur, Integer idOrganisme) throws SQLException {
         Connection connection = DataSource.getInstance().getConnection();
 
-        String requete = "insert into utilisateur (id_organisation,nom_utilisateur,mot_de_passe,nom,prenom,date_naissance,tel,adresse,mail,photo,role,cv,etat) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String requete = "insert into utilisateur (id_organisation,pseudo,mdp,nom,prenom,date_naissance,telephone,adresse,mail,photo,role,cv,etat) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement ps = connection.prepareStatement(requete);
         ps.setInt(1, idOrganisme);
         ps.setString(2, formateur.getNomUtilisateur());
@@ -54,7 +54,7 @@ public class ImplFormateurDAO implements IFormateurDAO {
     @Override
     public Formateur getFormateurByLogin(String login) throws SQLException {
         Connection connection = DataSource.getInstance().getConnection();
-        String requete = "select * from utilisateur where nom_utilisateur like ?";
+        String requete = "select * from utilisateur where pseudo like ?";
         PreparedStatement ps = connection.prepareCall(requete);
         ps.setString(1, login);
         ResultSet rs = ps.executeQuery();
@@ -82,7 +82,7 @@ public class ImplFormateurDAO implements IFormateurDAO {
     @Override
     public boolean supprimerFormateurByLogin(String login) throws SQLException {
         Connection connection = DataSource.getInstance().getConnection();
-        String requete = "delete from utilisateur where nom_utilisateur like ?";
+        String requete = "delete from utilisateur where pseudo like ?";
         PreparedStatement ps = connection.prepareCall(requete);
         ps.setString(1, login);
         int resultat = ps.executeUpdate();
@@ -124,7 +124,7 @@ public class ImplFormateurDAO implements IFormateurDAO {
     public boolean modifierFormateur(String login, Formateur newFormateur) throws SQLException {
         Connection connection = DataSource.getInstance().getConnection();
 
-        String requete = "update utilisateur set nom_utilisateur=?,mot_de_passe=?,nom=?,prenom=?,date_naissance=?,tel=?,adresse=?,mail=?,photo=?,role=?,cv=?,etat=? where nom_utilisateur like ?";
+        String requete = "update utilisateur set pseudo=?,mdp=?,nom=?,prenom=?,date_naissance=?,telephone=?,adresse=?,mail=?,photo=?,role=?,cv=?,etat=? where pseudo like ?";
         PreparedStatement ps = connection.prepareStatement(requete);
         ps.setString(1, newFormateur.getNomUtilisateur());
         ps.setString(2, newFormateur.getMotDePass());

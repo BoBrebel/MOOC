@@ -31,7 +31,7 @@ public class ImplLogDAO implements ILogDAO{
 
     @Override
     public boolean ajouterLog(Log Log) {
-        String query = "Insert into log(`id_log`, `id_utilisateur`, `tache`, `date_tache`) "
+        String query = "Insert into log(`id`, `id_utilisateur`, `tache`, `date`) "
                 + "values (NULL, ?, ?, ?);";
         try {
             PreparedStatement pSt = connection.prepareStatement(query);
@@ -48,7 +48,7 @@ public class ImplLogDAO implements ILogDAO{
 
     @Override
     public boolean supprimerLog(int id) {
-        String query="delete from log where id_log =?";
+        String query="delete from log where id =?";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, id);
@@ -93,7 +93,7 @@ public class ImplLogDAO implements ILogDAO{
     @Override
     public Log getLogbyid(int id) {
         Log log = new Log();
-        String query = "select * from log where id_log=?";
+        String query = "select * from log where id=?";
         
         try {
             PreparedStatement ps = connection.prepareStatement(query);

@@ -29,7 +29,7 @@ public class ImplAppreantDAO implements IApprenantDAO {
 
         Connection connection = DataSource.getInstance().getConnection();
 
-        String requete = "insert into utilisateur (nom_utilisateur,mot_de_passe,nom,prenom,date_naissance,tel,adresse,mail,photo,role,score) values (?,?,?,?,?,?,?,?,?,?,?)";
+        String requete = "insert into utilisateur (pseudo,mdp,nom,prenom,date_naissance,telephone,adresse,mail,photo,role,score) values (?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement ps = connection.prepareStatement(requete);
         ps.setString(1, apprenant.getNomUtilisateur());
         ps.setString(2, apprenant.getMotDePass());
@@ -51,7 +51,7 @@ public class ImplAppreantDAO implements IApprenantDAO {
     @Override
     public Apprenant getApprenantByLogin(String login) throws SQLException {
         Connection connection = DataSource.getInstance().getConnection();
-        String requete = "select * from utilisateur where nom_utilisateur like ?";
+        String requete = "select * from utilisateur where pseudo like ?";
         PreparedStatement ps = connection.prepareCall(requete);
         ps.setString(1, login);
         ResultSet rs = ps.executeQuery();
@@ -79,7 +79,7 @@ public class ImplAppreantDAO implements IApprenantDAO {
     @Override
     public boolean supprimerApprennantByLogin(String login) throws SQLException {
         Connection connection = DataSource.getInstance().getConnection();
-        String requete = "delete from utilisateur where nom_utilisateur like ?";
+        String requete = "delete from utilisateur where pseudo like ?";
         PreparedStatement ps = connection.prepareCall(requete);
         ps.setString(1, login);
          int resultat = ps.executeUpdate();
@@ -120,7 +120,7 @@ public class ImplAppreantDAO implements IApprenantDAO {
     public boolean modifierApprenant(String login, Apprenant newApprenant) throws SQLException {
         Connection connection = DataSource.getInstance().getConnection();
 
-        String requete = "update utilisateur set nom_utilisateur=?,mot_de_passe=?,nom=?,prenom=?,date_naissance=?,tel=?,adresse=?,mail=?,photo=?,role=?,score=? where nom_utilisateur like ?";
+        String requete = "update utilisateur set pseudo=?,mdp=?,nom=?,prenom=?,date_naissance=?,telephone=?,adresse=?,mail=?,photo=?,role=?,score=? where pseudo like ?";
         PreparedStatement ps = connection.prepareStatement(requete);
         ps.setString(1, newApprenant.getNomUtilisateur());
         ps.setString(2, newApprenant.getMotDePass());

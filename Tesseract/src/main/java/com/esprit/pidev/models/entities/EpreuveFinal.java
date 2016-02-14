@@ -12,8 +12,8 @@ package com.esprit.pidev.models.entities;
 public class EpreuveFinal extends Epreuve{
     protected int dureeExamen;
 
-    public EpreuveFinal(int dureeExamen, int id, String codeEpreuve, String difficulte) {
-        super(id, codeEpreuve, difficulte);
+    public EpreuveFinal(int dureeExamen, int id, String difficulte) {
+        super(id, difficulte);
         this.dureeExamen = dureeExamen;
     }
 

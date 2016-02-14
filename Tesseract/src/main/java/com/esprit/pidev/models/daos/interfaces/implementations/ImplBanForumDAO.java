@@ -29,7 +29,7 @@ public class ImplBanForumDAO implements IBanForumDAO{
 
     @Override
     public boolean setBanForum(BanForum banforum) {
-        String query = "Insert into ban_forum(`id_ban`, `id_utilisateur`, `cause`, `date_ban`,`duree`) "
+        String query = "Insert into ban_forum(`id`, `id_utilisateur`, `cause`, `date`,`duree`) "
                 + "values (NULL, ?, ?, ?, ?);";
         try {
             PreparedStatement pSt = connection.prepareStatement(query);
@@ -47,7 +47,7 @@ public class ImplBanForumDAO implements IBanForumDAO{
 
     @Override
     public boolean supprimerBanForum(int idBan) {
-         String query="delete from ban_forum where id_ban =?";
+         String query="delete from ban_forum where id =?";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, idBan);
@@ -62,7 +62,7 @@ public class ImplBanForumDAO implements IBanForumDAO{
 
     @Override
     public boolean modifierBanForum(BanForum banforum) {
-        String query="update ban_forum set id_utilisateur=?,cause=?,date_ban=?,duree=? where id_ban=?";
+        String query="update ban_forum set id_utilisateur=?,cause=?,date=?,duree=? where id=?";
         try {
             PreparedStatement pSt = connection.prepareStatement(query);
             pSt.setInt(1, banforum.getIdUtilisateur());
@@ -109,7 +109,7 @@ public class ImplBanForumDAO implements IBanForumDAO{
     @Override
     public BanForum getBanForumbyid(int id) {
          BanForum banforum = new BanForum();
-        String query = "select * from ban_forum where id_ban=?";
+        String query = "select * from ban_forum where id=?";
         
         try {
             PreparedStatement ps = connection.prepareStatement(query);

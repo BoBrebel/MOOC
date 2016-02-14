@@ -10,9 +10,9 @@ public class Reclamation {
     private String sujet;
     private String description;
     private Etat etat;
-    private String dateReclamation;
+    private Date dateReclamation;
 
-    public Reclamation(int idReclamation, int idUtilisateur, String sujet, String description, Etat etat, String dateReclamation) {
+    public Reclamation(int idReclamation, int idUtilisateur, String sujet, String description, Etat etat, Date dateReclamation) {
         this.idReclamation = idReclamation;
         this.idUtilisateur = idUtilisateur;
         this.sujet = sujet;
@@ -21,7 +21,7 @@ public class Reclamation {
         this.dateReclamation = dateReclamation;
     }
 
-    public Reclamation(int idUtilisateur, String sujet, String description, Etat etat, String dateReclamation) {
+    public Reclamation(int idUtilisateur, String sujet, String description, Etat etat, Date dateReclamation) {
         this.idUtilisateur = idUtilisateur;
         this.sujet = sujet;
         this.description = description;
@@ -72,11 +72,11 @@ public class Reclamation {
         this.etat = etat;
     }
 
-    public String getDateReclamation() {
+    public Date getDateReclamation() {
         return dateReclamation;
     }
 
-    public void setDateReclamation(String dateReclamation) {
+    public void setDateReclamation(Date dateReclamation) {
         this.dateReclamation = dateReclamation;
     }
 

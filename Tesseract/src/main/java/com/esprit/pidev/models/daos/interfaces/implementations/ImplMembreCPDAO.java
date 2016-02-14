@@ -28,7 +28,7 @@ public class ImplMembreCPDAO implements IMembreCPDAO {
     public boolean ajouterMembreCP(MembreCP MembreCP) throws SQLException {
         Connection connection = DataSource.getInstance().getConnection();
 
-        String requete = "insert into utilisateur (nom_utilisateur,mot_de_passe,nom,prenom,date_naissance,tel,adresse,mail,photo,role) values (?,?,?,?,?,?,?,?,?,?)";
+        String requete = "insert into utilisateur (pseudo,mdp,nom,prenom,date_naissance,telephone,adresse,mail,photo,role) values (?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement ps = connection.prepareStatement(requete);
         ps.setString(1, MembreCP.getNomUtilisateur());
         ps.setString(2, MembreCP.getMotDePass());
@@ -61,7 +61,7 @@ public class ImplMembreCPDAO implements IMembreCPDAO {
     public MembreCP getMembreCPByLogin(String login) throws SQLException {
 
         Connection connection = DataSource.getInstance().getConnection();
-        String requete = "select * from utilisateur where nom_utilisateur like ?";
+        String requete = "select * from utilisateur where pseudo like ?";
         PreparedStatement ps = connection.prepareCall(requete);
         ps.setString(1, login);
         ResultSet rs = ps.executeQuery();
@@ -87,7 +87,7 @@ public class ImplMembreCPDAO implements IMembreCPDAO {
     @Override
     public boolean supprimerMembreCPByLogin(String login) throws SQLException {
         Connection connection = DataSource.getInstance().getConnection();
-        String requete = "delete from utilisateur where nom_utilisateur like ?";
+        String requete = "delete from utilisateur where pseudo like ?";
         PreparedStatement ps = connection.prepareCall(requete);
         ps.setString(1, login);
         int resultat = ps.executeUpdate();
@@ -129,7 +129,7 @@ public class ImplMembreCPDAO implements IMembreCPDAO {
 
         Connection connection = DataSource.getInstance().getConnection();
 
-        String requete = "update utilisateur set nom_utilisateur=?,mot_de_passe=?,nom=?,prenom=?,date_naissance=?,tel=?,adresse=?,mail=?,photo=?,role=? where nom_utilisateur like ?";
+        String requete = "update utilisateur set pseudo=?,mdp=?,nom=?,prenom=?,date_naissance=?,telephone=?,adresse=?,mail=?,photo=?,role=? where pseudo like ?";
         PreparedStatement ps = connection.prepareStatement(requete);
         ps.setString(1, newMembreCP.getNomUtilisateur());
         ps.setString(2, newMembreCP.getMotDePass());

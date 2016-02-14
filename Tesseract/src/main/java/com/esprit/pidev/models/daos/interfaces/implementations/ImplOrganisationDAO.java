@@ -31,7 +31,7 @@ public class ImplOrganisationDAO implements IOrganisationDAO {
     
     @Override
     public boolean addOrganisation(Organisation org) {
-       String query = "Insert into organisation(`id_organisation`, `nom`, `adresse`, `matricule` , `photo` ) "
+       String query = "Insert into organisation(`id`, `nom`, `adresse`, `matricule` , `photo` ) "
                 + "values (NULL, ?, ?, ?, ? ,? );";
         try {
             PreparedStatement pSt = connection.prepareStatement(query);
@@ -50,7 +50,7 @@ public class ImplOrganisationDAO implements IOrganisationDAO {
 
     @Override
     public boolean deleteOrganisation(int idOrg) {
-                String query="delete from organisation where id_organisation =?";
+                String query="delete from organisation where id =?";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, idOrg);

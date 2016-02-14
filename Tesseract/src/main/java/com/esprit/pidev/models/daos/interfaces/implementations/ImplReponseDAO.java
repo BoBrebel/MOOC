@@ -35,7 +35,7 @@ public class ImplReponseDAO implements IReponseDAO{
     @Override
     public boolean createReponse(Reponse reponse) {
         try {
-            String request="insert into reponses(reponse, justification, etat, idQuestion) values(?,?,?,?)";
+            String request="insert into reponses(reponse, justification, etat, id_question) values(?,?,?,?)";
             pst = connection.prepareStatement(request);
             pst.setString(1, reponse.getReponse());
             pst.setString(2, reponse.getJustification());
@@ -68,7 +68,7 @@ public class ImplReponseDAO implements IReponseDAO{
     @Override
     public boolean updateReponse(Reponse reponse, int id) {
         try {
-            String request = "update reponses set reponse=?, justification=?, etat=?, idQuestion=? where id=?";
+            String request = "update reponses set reponse=?, justification=?, etat=?, id_question=? where id=?";
             pst = connection.prepareStatement(request);
             pst.setString(1, reponse.getReponse());
             pst.setString(2, reponse.getJustification());
@@ -94,8 +94,8 @@ public class ImplReponseDAO implements IReponseDAO{
             reponse.setId(rS.getInt("id"));
             reponse.setReponse(rS.getString("reponse"));
             reponse.setJustification(rS.getString("justification"));
-            reponse.setEtat(rS.getString("Etat"));
-            reponse.setIdQuestion(rS.getInt("idQuestion"));
+            reponse.setEtat(rS.getString("etat"));
+            reponse.setIdQuestion(rS.getInt("id_question"));
         } catch (SQLException ex) {
             Logger.getLogger(ImplReponseDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -110,7 +110,7 @@ public class ImplReponseDAO implements IReponseDAO{
             pst=connection.prepareStatement(request);
             rS=pst.executeQuery();
             while(rS.next()){
-                Reponse r=new Reponse(rS.getInt(1),rS.getString("reponse"),rS.getString("justification"),rS.getString("etat"), rS.getInt(5));
+                Reponse r=new Reponse(rS.getInt(1),rS.getString("reponse"),rS.getString("justification"),rS.getString("etat"), rS.getInt(2));
                 epreuves.add(r);
             }
         } catch (SQLException ex) {
