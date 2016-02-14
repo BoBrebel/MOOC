@@ -5,14 +5,15 @@ import java.util.List;
 
 
 public class Chapitre {
-   private int idChapitre ; 
-   private int idCours ;
-   private String nom ;
-   private int numero ; 
-   private String description ;
-   private String resume ;
-   private List<Objectif>  listObjectif ;
-   
+    private int idChapitre;
+    private int idCours;
+    private String nom;
+    private int numero;
+    private String description;
+    private String resume;
+
+    public Chapitre() {
+    }
 
     public Chapitre(int idChapitre, int idCours, String nom, int numero, String description, String resume) {
         this.idChapitre = idChapitre;
@@ -21,27 +22,6 @@ public class Chapitre {
         this.numero = numero;
         this.description = description;
         this.resume = resume;
-    }
-
-    public Chapitre(int idChapitre, int idCours, String nom, int numero, String description, String resume, List<Objectif> listObjectif) {
-        this.idChapitre = idChapitre;
-        this.idCours = idCours;
-        this.nom = nom;
-        this.numero = numero;
-        this.description = description;
-        this.resume = resume;
-        this.listObjectif = listObjectif;
-    }
-     
-
-    public Chapitre(String nom, int numero, String description, String resume) {
-        this.nom = nom;
-        this.numero = numero;
-        this.description = description;
-        this.resume = resume;
-    }
-
-    public Chapitre() {
     }
 
     public int getIdChapitre() {
@@ -94,22 +74,15 @@ public class Chapitre {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + this.idChapitre;
+        int hash = 3;
         return hash;
     }
 
-    public List<Objectif> getListObjectif() {
-        return listObjectif;
-    }
-
-    public void setListObjectif(List<Objectif> listObjectif) {
-        this.listObjectif = listObjectif;
-    }
-    
-
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
         if (obj == null) {
             return false;
         }
@@ -125,10 +98,13 @@ public class Chapitre {
 
     @Override
     public String toString() {
-        return "Chapitre{" + "idChapitre=" + idChapitre + ", idCours=" + idCours + ", nom=" + nom + ", numero=" + numero + ", description=" + description + ", resume=" + resume + ", listObjectif=" + listObjectif + '}';
+        return "Chapitre{" + "idChapitre=" + idChapitre + ", idCours=" + idCours + ", nom=" + nom + ", numero=" + numero + ", description=" + description + ", resume=" + resume + '}';
     }
-
-   
-   
-   
+    
+    
+    
+    
+    
+    
+    
 }
