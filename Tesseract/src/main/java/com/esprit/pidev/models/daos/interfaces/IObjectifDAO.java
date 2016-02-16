@@ -1,14 +1,19 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.esprit.pidev.models.daos.interfaces;
 
 
-import com.esprit.pidev.models.entities.Chapitre;
-import com.esprit.pidev.models.entities.Cours;
 import com.esprit.pidev.models.entities.Objectif;
 import java.sql.SQLException;
 import java.util.List;
 
-
+/**
+ *
+ * @author Noor
+ */
 public interface IObjectifDAO {
 
     boolean createObjectif(Objectif objectif) throws SQLException;
@@ -21,6 +26,6 @@ public interface IObjectifDAO {
 
     List<Objectif> displayObjectifs() throws SQLException;
 
-    List<Objectif> getObjectifByChapitre(Chapitre chapitre) throws SQLException;
+    Objectif getObjectifByName(String nomObjectif) throws SQLException;
 
 }
