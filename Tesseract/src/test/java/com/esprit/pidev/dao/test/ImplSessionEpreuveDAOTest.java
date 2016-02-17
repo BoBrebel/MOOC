@@ -67,6 +67,6 @@ public class ImplSessionEpreuveDAOTest {
         ISessionEpreuveDAO iSessionEPDAO = DAOFactory.getSessionEpreuveDAO();
          List test = iSessionEPDAO.getSessionEpreuvebyUserid(14);
 
-         assertEquals(test.size(), 1);
+         assertEquals(test.size(), 0);
     }
 }
