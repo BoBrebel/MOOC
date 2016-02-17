@@ -32,7 +32,7 @@ public class DataSource {
         properties = new Properties();
         try {
             //properties.load(new FileInputStream(new File("config.properties")));
-            url ="jdbc:mysql://localhost:3306/mydb"; //properties.getProperty("url");
+            url ="jdbc:mysql://localhost:3306/tesseract"; //properties.getProperty("url");
             login ="root"; //properties.getProperty("login");
             password = "";//properties.getProperty("password");
             connection = DriverManager.getConnection(url,login,password);
