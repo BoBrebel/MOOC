@@ -15,6 +15,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -59,27 +63,31 @@ public class ImplCoursDAO implements ICoursDAO {
     }
 
     @Override
-    public List<Cours> findAll() throws SQLException {
-        List<Cours> listeCours = new ArrayList<>();
-        String requete = "select * from cours";
-
-        Statement statement = cnx.createStatement();
-        ResultSet resultat = statement.executeQuery(requete);
-
-        while (resultat.next()) {
-            Cours cours = new Cours();
-            cours.setIdCours(resultat.getInt(1));
-            cours.setNomCours(resultat.getString(3));
-            cours.setDescriptionCours(resultat.getString(5));
-
-            listeCours.add(cours);
+    public ObservableList<Cours> findAll(){
+        ObservableList<Cours> listeCours = FXCollections.observableArrayList();
+        try {
+            String requete = "select * from cours";
+            
+            Statement statement = cnx.createStatement();
+            ResultSet resultat = statement.executeQuery(requete);
+            
+            while (resultat.next()) {
+                Cours cours = new Cours();
+                cours.setIdCours(resultat.getInt(1));
+                cours.setNomCours(resultat.getString(3));
+                cours.setDescriptionCours(resultat.getString(5));
+                
+                listeCours.add(cours);
+            }
+            if (Objects.nonNull(listeCours)) {
+                return listeCours;
+            }
+            
+            throw new UnsupportedOperationException();
+        } catch (SQLException ex) {
+            Logger.getLogger(ImplCoursDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if (Objects.nonNull(listeCours)) {
-            return listeCours;
-        }
-
-        throw new UnsupportedOperationException();
-
+        return listeCours;
     }
 // problème bacem
     @Override
