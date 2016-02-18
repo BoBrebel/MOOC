@@ -1,5 +1,6 @@
 package com.esprit.pidev.tesseract;
 
+import com.esprit.pidev.controllers.LoginFXMLController;
 import com.esprit.pidev.models.database.DataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -10,6 +11,7 @@ import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
@@ -18,6 +20,12 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
      //   Connection cnx =DataSource.getInstance().getConnection();
+       FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginFXML.fxml"));
+        AnchorPane root = (AnchorPane) loader.load();
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
     }
 
     /**
@@ -29,6 +37,6 @@ public class MainApp extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException {
-        System.out.println("hello");
+       launch(args);
     }
 }
