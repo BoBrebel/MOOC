@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
 <?import java.util.*?>
@@ -16,7 +18,7 @@
                   <TableView fx:id="coursDisplayCourTable" layoutY="51.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
                       <TableColumn fx:id="nomDisplayCourColumn" prefWidth="75.0" text="Nom" />
-                      <TableColumn fx:id="matiereDisplayCourColumn" prefWidth="75.0" text="Matière" />
+                      <TableColumn fx:id="difficulteDisplayCourColumn" prefWidth="75.0" text="Difficulté" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -26,26 +28,26 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <ToolBar AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                  <ToolBar prefHeight="42.0" prefWidth="627.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                     <items>
                       <Button mnemonicParsing="false" text="Ajouter..." />
                         <Button mnemonicParsing="false" text="Modifier..." />
-                        <Button mnemonicParsing="false" text="Supprimer" />
+                        <Button mnemonicParsing="false" onAction="#handleDeleteCours" text="Supprimer" />
                     </items>
                   </ToolBar>
                   <Label text="Détail du Cours" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
-                  <GridPane AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="100.0">
+                  <GridPane prefHeight="451.0" prefWidth="546.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="100.0">
                     <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.3333740234375" minWidth="10.0" prefWidth="131.00003051757812" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="474.9999694824219" minWidth="10.0" prefWidth="474.9999694824219" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.3333740234375" minWidth="10.0" prefWidth="238.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="474.9999694824219" minWidth="10.0" prefWidth="328.0" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="50.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="50.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="30.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
                         <Label text="Identifant" />
@@ -54,12 +56,27 @@
                         <Label text="Difficulté" GridPane.rowIndex="3" />
                         <Label text="Badge" GridPane.rowIndex="4" />
                         <Label text="Description" GridPane.rowIndex="5" />
-                        <Label text="-" GridPane.columnIndex="1" />
-                        <Label text="-" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label text="-" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label text="-" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label text="-" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label text="-" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label fx:id="idDisplayCourLabel" text="-" GridPane.columnIndex="1">
+                           <GridPane.margin>
+                              <Insets left="10.0" />
+                           </GridPane.margin></Label>
+                        <Label fx:id="nomDisplayCourLabel" text="-" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets left="10.0" />
+                           </GridPane.margin></Label>
+                        <Label fx:id="matiereDisplayCourLabel" text="-" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets left="10.0" />
+                           </GridPane.margin></Label>
+                        <Label fx:id="difficulteDisplayCourLabel" text="-" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets left="10.0" />
+                           </GridPane.margin></Label>
+                        <Label fx:id="descriptionDisplayCourLabel" text="-" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                           <GridPane.margin>
+                              <Insets left="10.0" />
+                           </GridPane.margin></Label>
+                        <ImageView fx:id="badgeDisplayCourImageView" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                      </children>
                   </GridPane>
                </children>

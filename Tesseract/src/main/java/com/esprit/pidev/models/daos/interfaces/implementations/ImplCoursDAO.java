@@ -78,7 +78,7 @@ public class ImplCoursDAO implements ICoursDAO {
                 cours.setIdMatiere(resultat.getInt(2));
                 cours.setIdFormateur(resultat.getInt(3));
                 cours.setNomCours(resultat.getString(4));
-                cours.setDifficulte(Difficulte.FACILE);//resultat.getString(5)
+                cours.setDifficulte(Difficulte.valueOf(resultat.getString(5)));
                 cours.setDescriptionCours(resultat.getString(6));
                 cours.setAffiche(resultat.getString(8));
                 cours.setBadge(resultat.getString(7));

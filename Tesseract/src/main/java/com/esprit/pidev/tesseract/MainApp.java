@@ -21,12 +21,12 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
      //   Connection cnx =DataSource.getInstance().getConnection();
-       FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginFXML.fxml"));
+       FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/displayCours.fxml"));
         AnchorPane root = (AnchorPane) loader.load();
         Scene scene = new Scene(root);
 
         stage.setScene(scene);
-        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initStyle(StageStyle.UTILITY);
         stage.show();
     }
 
