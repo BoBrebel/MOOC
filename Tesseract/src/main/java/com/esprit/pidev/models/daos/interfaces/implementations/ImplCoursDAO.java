@@ -10,6 +10,7 @@ import com.esprit.pidev.models.database.DataSource;
 
 import com.esprit.pidev.models.entities.Cours;
 import com.esprit.pidev.models.entities.Matiere;
+import com.esprit.pidev.models.enums.Difficulte;
 import java.sql.Connection;
 import java.sql.*;
 import java.util.ArrayList;
@@ -74,22 +75,23 @@ public class ImplCoursDAO implements ICoursDAO {
             while (resultat.next()) {
                 Cours cours = new Cours();
                 cours.setIdCours(resultat.getInt(1));
-                cours.setNomCours(resultat.getString(3));
-                cours.setDescriptionCours(resultat.getString(5));
+                cours.setIdMatiere(resultat.getInt(2));
+                cours.setIdFormateur(resultat.getInt(3));
+                cours.setNomCours(resultat.getString(4));
+                cours.setDifficulte(Difficulte.FACILE);//resultat.getString(5)
+                cours.setDescriptionCours(resultat.getString(6));
+                cours.setAffiche(resultat.getString(8));
+                cours.setBadge(resultat.getString(7));
                 
                 listeCours.add(cours);
             }
-            if (Objects.nonNull(listeCours)) {
-                return listeCours;
-            }
-            
-            throw new UnsupportedOperationException();
+            return listeCours;
         } catch (SQLException ex) {
             Logger.getLogger(ImplCoursDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listeCours;
     }
-// problème bacem
+// problÃ¨me bacem
     @Override
     public Cours findCoursById(int idCours) throws SQLException {
         Cours cours = new Cours();
@@ -110,7 +112,7 @@ public class ImplCoursDAO implements ICoursDAO {
         throw new UnsupportedOperationException();
 
     }
-// problème  bacem
+// problÃ¨me  bacem
     @Override
     public List<Cours> findCoursByIdFromateur(int idFormateur) throws SQLException {
         List<Cours> listeCours = new ArrayList<>();

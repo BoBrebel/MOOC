@@ -4,6 +4,7 @@ import com.esprit.pidev.models.entities.Cours;
 import com.esprit.pidev.models.entities.Matiere;
 import java.sql.SQLException;
 import java.util.List;
+import javafx.collections.ObservableList;
 
 public interface ICoursDAO {
 
@@ -13,7 +14,7 @@ public interface ICoursDAO {
 
     public boolean updateCours(Cours c1, Matiere m1) throws SQLException;
 
-    public List<Cours> findAll() throws SQLException;
+    public ObservableList<Cours> findAll() throws SQLException;
 
     public Cours findCoursById(int idCours) throws SQLException;
 

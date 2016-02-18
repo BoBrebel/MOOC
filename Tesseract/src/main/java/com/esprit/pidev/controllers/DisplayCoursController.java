@@ -8,7 +8,11 @@ package com.esprit.pidev.controllers;
 import com.esprit.pidev.models.daos.interfaces.implementations.ImplCoursDAO;
 import com.esprit.pidev.models.entities.Cours;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -41,20 +45,19 @@ public class DisplayCoursController implements Initializable {
     @FXML
     private Label descriptionDisplayCourLabel;
     
-    private ImplCoursDAO mainApp;
+    private ImplCoursDAO coursDAO;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        coursDAO=new ImplCoursDAO();
+        coursDisplayCourTable.setItems(coursDAO.findAll());
         nomDisplayCourColumn.setCellValueFactory(cellData -> cellData.getValue().nomCoursProperty());
         matiereDisplayCourColumn.setCellValueFactory(new PropertyValueFactory("idMatiere"));
     }
-    public void setImplCoursDAO(ImplCoursDAO mainApp) {
-        this.mainApp = mainApp;
-
         // Add observable list data to the table
-        coursDisplayCourTable.setItems(mainApp.findAll());
-    }
+        
+    
     
 }
