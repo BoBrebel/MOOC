@@ -12,7 +12,7 @@ public interface ICoursDAO {
 
     public boolean deleteCoursById(int idCours) throws SQLException;
 
-    public boolean updateCours(Cours c1, Matiere m1) throws SQLException;
+    public boolean updateCours(Cours c1, int id) throws SQLException;
 
     public ObservableList<Cours> findAll() throws SQLException;
 

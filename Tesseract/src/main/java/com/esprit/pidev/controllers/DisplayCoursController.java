@@ -10,22 +10,32 @@ import com.esprit.pidev.models.daos.interfaces.implementations.ImplMatiereDAO;
 import com.esprit.pidev.models.entities.Cours;
 import com.esprit.pidev.models.entities.Matiere;
 import com.esprit.pidev.models.enums.Difficulte;
+import com.esprit.pidev.tesseract.MainApp;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.stage.Window;
 
 /**
  * FXML Controller class
@@ -55,6 +65,7 @@ public class DisplayCoursController implements Initializable {
     private Label descriptionDisplayCourLabel;
     
     private ImplCoursDAO coursDAO;
+    private Window primaryStage;
     /**
      * Initializes the controller class.
      */
@@ -97,15 +108,88 @@ public class DisplayCoursController implements Initializable {
             descriptionDisplayCourLabel.setText("-");
         }
     }
+    public boolean showCoursEditDialog(Cours cours) {
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("/fxml/editCours.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Edit Cours");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initStyle(StageStyle.UTILITY);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the person into the controller.
+            EditCoursController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setCours(cours);
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    @FXML
+    private void handleAddCours() {
+        Cours tempCours = new Cours();
+        boolean ajouterClicked = showCoursEditDialog(tempCours);
+        if (ajouterClicked) {
+            //getCoursData().add(tempCours);
+        }
+    }
+
+    /**
+     * Called when the user clicks the edit button. Opens a dialog to edit
+     * details for the selected person.
+     */
+    @FXML
+    private void handleEditCours() {
+        Cours selectedCours = coursDisplayCourTable.getSelectionModel().getSelectedItem();
+        if (selectedCours != null) {
+            boolean modifierClicked = showCoursEditDialog(selectedCours);
+            if (modifierClicked) {
+                showCoursDetails(selectedCours);
+            }
+
+        } else {
+            // Nothing selected.
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(primaryStage);
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Cours Selected");
+            alert.setContentText("Please select a person in the table.");
+
+            alert.showAndWait();
+        }
+    }
+    
     @FXML
     private void handleDeleteCours() throws SQLException {
         int selectedIndex = coursDisplayCourTable.getSelectionModel().getSelectedIndex();
+        Cours cours = new Cours();
+        cours=coursDisplayCourTable.getSelectionModel().getSelectedItem();
         if (selectedIndex >= 0) {
-            coursDisplayCourTable.getItems().remove(selectedIndex);
-            Cours cours = new Cours();
-            cours=coursDisplayCourTable.getSelectionModel().getSelectedItem();
-            coursDAO=new ImplCoursDAO();
-            coursDAO.deleteCoursById(cours.getIdCours());
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Suppression !!!");
+            alert.setHeaderText("Etes-vous sur de bien vouloir supprimer '"+cours.getNomCours()+"'");
+            //alert.setContentText("Are you ok with this?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                coursDisplayCourTable.getItems().remove(selectedIndex);
+                coursDAO=new ImplCoursDAO();
+                coursDAO.deleteCoursById(cours.getIdCours());
+            }
             
         }
     }

@@ -30,8 +30,8 @@
                <children>
                   <ToolBar prefHeight="42.0" prefWidth="627.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                     <items>
-                      <Button mnemonicParsing="false" text="Ajouter..." />
-                        <Button mnemonicParsing="false" text="Modifier..." />
+                      <Button mnemonicParsing="false" onAction="#handleAddCours" text="Ajouter..." />
+                        <Button mnemonicParsing="false" onAction="#handleEditCours" text="Modifier..." />
                         <Button mnemonicParsing="false" onAction="#handleDeleteCours" text="Supprimer" />
                     </items>
                   </ToolBar>

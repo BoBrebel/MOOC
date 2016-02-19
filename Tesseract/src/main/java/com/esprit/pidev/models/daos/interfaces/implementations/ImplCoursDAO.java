@@ -136,13 +136,16 @@ public class ImplCoursDAO implements ICoursDAO {
     }
 
     @Override
-    public boolean updateCours(Cours c1, Matiere m1) throws SQLException {
-        String requete = "update cours set nom =?,description=? where id_matiere=?";
+    public boolean updateCours(Cours c1, int id) throws SQLException {
+        String requete = "update cours set nom =?, difficulte=?, description=?, badge=?, affiche=? where id=?";
 
         PreparedStatement ps = cnx.prepareStatement(requete);
-        ps.setString(1, m1.getNomMatiere());
-        ps.setString(2, m1.getDescriptionMatiere());
-        ps.setInt(3, m1.getIdMatiere());
+        ps.setString(1, c1.getNomCours());
+        ps.setString(2, c1.getDifficulte().toString());
+        ps.setString(3, c1.getDescriptionCours());
+        ps.setString(4, c1.getBadge());
+        ps.setString(5, c1.getAffiche());
+        ps.setInt(6, id);
 
         int update = ps.executeUpdate();
         ps.close();
