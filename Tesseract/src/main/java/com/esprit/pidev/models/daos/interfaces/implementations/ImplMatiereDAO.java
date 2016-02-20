@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.Objects;
 
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 
 public class ImplMatiereDAO implements IMatiereDAO{
@@ -107,7 +109,16 @@ public class ImplMatiereDAO implements IMatiereDAO{
     
     }
     
-
+    public ObservableList<String> findMatiereName() throws SQLException{
+        ObservableList<String> listeNomMatiere = FXCollections.observableArrayList();
+        String req = "SELECT nom FROM matiere";
+        Statement st = cnx.createStatement();
+        ResultSet rs = st.executeQuery(req);
+        while (rs.next()){
+            listeNomMatiere.add(rs.getString(1));
+        }
+        return listeNomMatiere;
+    }
    
 
     @Override
@@ -152,8 +163,6 @@ public class ImplMatiereDAO implements IMatiereDAO{
         throw new UnsupportedOperationException();
     
     }
-    
-
     
 
     @Override

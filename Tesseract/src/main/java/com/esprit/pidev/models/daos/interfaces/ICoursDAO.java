@@ -8,7 +8,7 @@ import javafx.collections.ObservableList;
 
 public interface ICoursDAO {
 
-    public boolean AjouterCours(Cours c1, Matiere m1) throws SQLException;
+    public boolean AjouterCours(Cours c1) throws SQLException;
 
     public boolean deleteCoursById(int idCours) throws SQLException;
 

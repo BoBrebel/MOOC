@@ -41,7 +41,7 @@ public class ImplCoursDAOTest {
         Matiere matiere = new Matiere(1, "haikel", "yassmine");
         ICoursDAO coursDao = DAOFactory.getCoursDAO();
         Cours cours = new Cours(2,"java", " ",null, "",25, "certView",1);
-        boolean test = coursDao.AjouterCours(cours, matiere);
+        boolean test = coursDao.AjouterCours(cours);
         assertTrue(test);
 
     }

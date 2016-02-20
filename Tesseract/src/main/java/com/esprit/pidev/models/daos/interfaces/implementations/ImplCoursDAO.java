@@ -34,17 +34,16 @@ public class ImplCoursDAO implements ICoursDAO {
     }
 
     @Override
-    public boolean AjouterCours(Cours c1, Matiere m1) throws SQLException {
+    public boolean AjouterCours(Cours c1) throws SQLException {
 
-        String req = "insert into cours (id,nom,difficulte,description,id_matiere,badge,affiche) values (?,?,?,?,?,?,?)";
+        String req = "insert into cours (nom,difficulte,description,id_matiere,badge,affiche) values (?,?,?,?,?,?)";
         PreparedStatement ps = cnx.prepareStatement(req);
-        ps.setInt(1, c1.getIdCours());
-        ps.setString(2, c1.getNomCours());
-        ps.setObject(3, c1.getDifficulte());
-        ps.setString(4, c1.getDescriptionCours());
-        ps.setInt(5, m1.getIdMatiere());
-        ps.setString(6, c1.getBadge());
-        ps.setString(7, c1.getAffiche());
+        ps.setString(1, c1.getNomCours());
+        ps.setObject(2, c1.getDifficulte().toString());
+        ps.setString(3, c1.getDescriptionCours());
+        ps.setInt(4, c1.getIdMatiere());
+        ps.setString(5, c1.getBadge());
+        ps.setString(6, c1.getAffiche());
         int ajout = ps.executeUpdate();
         ps.close();
         return (ajout == 1);

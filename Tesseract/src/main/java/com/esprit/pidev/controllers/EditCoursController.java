@@ -8,18 +8,31 @@ package com.esprit.pidev.controllers;
 import com.esprit.pidev.models.daos.interfaces.implementations.ImplCoursDAO;
 import com.esprit.pidev.models.entities.Cours;
 import com.esprit.pidev.models.enums.Difficulte;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.channels.FileChannel;
 import java.sql.SQLException;
 import java.util.Optional;
+import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
 
 /**
  * FXML Controller class
@@ -58,6 +71,8 @@ public class EditCoursController implements Initializable {
     private Cours cours;
     private boolean modifierClicked = false;
     
+    private static final String CHAR_LIST =
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
     /**
      * Initializes the controller class.
      */
@@ -71,18 +86,30 @@ public class EditCoursController implements Initializable {
     
     public void setCours(Cours cours){
         this.cours=cours;
-        nomEditCoursLabel.setText("Modification '"+cours.getNomCours()+"'");
-        imageBadge = new Image("/images/"+cours.getBadge());
-        imageAffiche = new Image("/images/"+cours.getAffiche());
-        idEditCourLabel.setText(Integer.toString(cours.getIdCours()));
-        nomEditCourTextField.setText(cours.getNomCours());
-        difficulteEditCourComboBox.setItems( FXCollections.observableArrayList( Difficulte.values()));
-        difficulteEditCourComboBox.setValue(cours.getDifficulte());
-        badgeEditCourImageView.setImage(imageBadge);
-        badgeEditCoursLabel.setText(cours.getBadge());
-        afficheEditCourImageView.setImage(imageAffiche);
-        afficheEditCoursLabel.setText(cours.getAffiche());
-        descriptionEditCoursTextArea.setText(cours.getDescriptionCours());
+        if (cours.getNomCours()!=null){
+            nomEditCoursLabel.setText("Modification '"+cours.getNomCours()+"'");
+            imageBadge = new Image("/images/"+cours.getBadge());
+            imageAffiche = new Image("/images/"+cours.getAffiche());
+            idEditCourLabel.setText(Integer.toString(cours.getIdCours()));
+            nomEditCourTextField.setText(cours.getNomCours());
+            difficulteEditCourComboBox.setItems( FXCollections.observableArrayList( Difficulte.values()));
+            difficulteEditCourComboBox.setValue(cours.getDifficulte());
+            badgeEditCourImageView.setImage(imageBadge);
+            badgeEditCoursLabel.setText(cours.getBadge());
+            afficheEditCourImageView.setImage(imageAffiche);
+            afficheEditCoursLabel.setText(cours.getAffiche());
+            descriptionEditCoursTextArea.setText(cours.getDescriptionCours());
+        }else{
+            nomEditCoursLabel.setText("Ajout nouveau cour");
+            imageBadge = new Image("/images/no_image.png");
+            imageAffiche = new Image("/images/no_image.png");
+            badgeEditCourImageView.setImage(imageBadge);
+            badgeEditCoursLabel.setText("no_image.png");
+            afficheEditCourImageView.setImage(imageAffiche);
+            afficheEditCoursLabel.setText("no_image.png");
+            difficulteEditCourComboBox.setItems( FXCollections.observableArrayList( Difficulte.values()));
+        }
+        
         
     }
     public boolean isOkClicked() {
@@ -90,7 +117,7 @@ public class EditCoursController implements Initializable {
     }
     
     @FXML
-    private void handleModifier() throws SQLException {
+    private void handleModifier() throws SQLException, InterruptedException {
         if (isInputValid()) {
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("Modification !!!");
@@ -107,6 +134,7 @@ public class EditCoursController implements Initializable {
                 ImplCoursDAO coursDAO = new ImplCoursDAO();
                 coursDAO.updateCours(cours, cours.getIdCours());
                 modifierClicked = true;
+                
                 dialogStage.close();
             }
         }
@@ -114,6 +142,64 @@ public class EditCoursController implements Initializable {
      @FXML
     private void handleAnnuler() {
         dialogStage.close();
+    }
+    private int getRandomNumber() {
+        int randomInt = 0;
+        Random randomGenerator = new Random();
+        randomInt = randomGenerator.nextInt(CHAR_LIST.length());
+        if (randomInt - 1 == -1) {
+            return randomInt;
+        } else {
+            return randomInt - 1;
+        }
+    }
+    @FXML
+    private void handleBadgeAdd() throws IOException{
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choisissez une image pour le badge");
+        fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+        
+        File selectedFile = fileChooser.showOpenDialog(null);
+        
+        badgeEditCoursLabel.setText(selectedFile.getName());
+        Image image = new Image(selectedFile.toURI().toString());
+        badgeEditCourImageView.setImage(image);
+        if(selectedFile!=null){
+            String path = selectedFile.getAbsolutePath();
+            String ext = path.substring(path.lastIndexOf("."));
+            ext=ext.toLowerCase();
+            FileChannel in = null;
+            FileChannel out = null;
+                StringBuffer str = new StringBuffer();
+                for(int i=0; i<10; i++){
+                    int number = getRandomNumber();
+                    char ch = CHAR_LIST.charAt(number);
+                    str.append(ch);
+                }
+            try {
+                    // Init
+                in = new FileInputStream(selectedFile).getChannel();
+                out = new FileOutputStream("src/main/resources/images/"+str+ext).getChannel();
+
+                // Copie depuis le in vers le out
+                in.transferTo(0, in.size(), out);
+                badgeEditCoursLabel.setText(str+ext);
+            } catch (Exception e) {
+                e.printStackTrace(); 
+            } finally {
+                if(in != null) {
+                    try {
+                        in.close();
+                    } catch (IOException e) {}
+                }
+                if(out != null) {
+                    try {
+                        out.close();
+                    } catch (IOException e) {}
+                }
+            }
+        }
+
     }
     
     private boolean isInputValid() {

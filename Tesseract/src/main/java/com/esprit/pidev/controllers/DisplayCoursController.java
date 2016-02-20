@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -79,7 +80,7 @@ public class DisplayCoursController implements Initializable {
         coursDisplayCourTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showCoursDetails(newValue));
     }
     private void showCoursDetails(Cours cours) {
-        Image image;
+        Image imageBadge;
         if (cours != null) {
             ImplMatiereDAO matiereDAO = new ImplMatiereDAO();
             Matiere matiere = new Matiere();
@@ -93,18 +94,18 @@ public class DisplayCoursController implements Initializable {
             nomDisplayCourLabel.setText(cours.getNomCours());
             matiereDisplayCourLabel.setText(matiere.getNomMatiere());
             difficulteDisplayCourLabel.setText(cours.getDifficulte().toString());
-            image = new Image("/images/"+cours.getBadge());
-            badgeDisplayCourImageView.setImage(image);
+            imageBadge = new Image("/images/"+cours.getBadge());
+            badgeDisplayCourImageView.setImage(imageBadge);
             descriptionDisplayCourLabel.setText(cours.getDescriptionCours());
 
         } else {
             // Cours is null, remove all the text.
-            image = new Image("/images/no_image.png");
+            imageBadge = new Image("/images/no_image.png");
             idDisplayCourLabel.setText("-");
             nomDisplayCourLabel.setText("-");
             matiereDisplayCourLabel.setText("-");
             difficulteDisplayCourLabel.setText("-");
-            badgeDisplayCourImageView.setImage(image);
+            badgeDisplayCourImageView.setImage(imageBadge);
             descriptionDisplayCourLabel.setText("-");
         }
     }
@@ -118,7 +119,7 @@ public class DisplayCoursController implements Initializable {
             // Create the dialog Stage.
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Edit Cours");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initModality(Modality.APPLICATION_MODAL);
             dialogStage.initStyle(StageStyle.UTILITY);
             dialogStage.initOwner(primaryStage);
             Scene scene = new Scene(page);
@@ -138,13 +139,46 @@ public class DisplayCoursController implements Initializable {
             return false;
         }
     }
+    public boolean showCoursAddDialog(Cours cours) {
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("/fxml/addCours.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Ajouter un Cours");
+            dialogStage.initModality(Modality.APPLICATION_MODAL);
+            dialogStage.initStyle(StageStyle.UTILITY);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the person into the controller.
+            AddCoursController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setCours(cours);
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
     
     @FXML
-    private void handleAddCours() {
+    private void handleAddCours() throws SQLException {
         Cours tempCours = new Cours();
-        boolean ajouterClicked = showCoursEditDialog(tempCours);
+        ImplCoursDAO iCours= new ImplCoursDAO();
+        boolean ajouterClicked = showCoursAddDialog(tempCours);
         if (ajouterClicked) {
-            //getCoursData().add(tempCours);
+            coursDAO=new ImplCoursDAO();
+            coursDisplayCourTable.setItems(coursDAO.findAll());
+            nomDisplayCourColumn.setCellValueFactory(cellData -> cellData.getValue().nomCoursProperty());
         }
     }
 
@@ -153,7 +187,7 @@ public class DisplayCoursController implements Initializable {
      * details for the selected person.
      */
     @FXML
-    private void handleEditCours() {
+    private void handleEditCours(){
         Cours selectedCours = coursDisplayCourTable.getSelectionModel().getSelectedItem();
         if (selectedCours != null) {
             boolean modifierClicked = showCoursEditDialog(selectedCours);

@@ -34,7 +34,7 @@
             <TextField fx:id="nomEditCourTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextArea fx:id="descriptionEditCoursTextArea" prefHeight="81.0" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <ComboBox fx:id="difficulteEditCourComboBox" prefHeight="31.0" prefWidth="268.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button fx:id="badgeEditCourButton" mnemonicParsing="false" text="..." GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <Button fx:id="badgeEditCourButton" mnemonicParsing="false" onAction="#handleBadgeAdd" text="..." GridPane.columnIndex="1" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets left="220.0" />
                </GridPane.margin>
