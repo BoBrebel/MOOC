@@ -1,6 +1,6 @@
 package com.esprit.pidev.tesseract;
 
-import com.esprit.pidev.controllers.LoginFXMLController;
+
 import com.esprit.pidev.models.database.DataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -21,7 +21,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
      //   Connection cnx =DataSource.getInstance().getConnection();
-       FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/displayCours.fxml"));
+       FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginFXML.fxml"));
         AnchorPane root = (AnchorPane) loader.load();
         Scene scene = new Scene(root);
 
