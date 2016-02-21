@@ -36,27 +36,27 @@ public class Chapitre {
         this.resume = new SimpleStringProperty(resume);
     }
 
-    public IntegerProperty getIdProperty() {
+    public IntegerProperty IdProperty() {
         return id;
     }
 
-    public IntegerProperty getIdCoursProperty() {
+    public IntegerProperty IdCoursProperty() {
         return idCours;
     }
 
-    public StringProperty getNomProperty() {
+    public StringProperty NomProperty() {
         return nom;
     }
 
-    public IntegerProperty getNumeroProperty() {
+    public IntegerProperty NumeroProperty() {
         return numero;
     }
 
-    public StringProperty getDescriptionProperty() {
+    public StringProperty DescriptionProperty() {
         return description;
     }
 
-    public StringProperty getResumeProperty() {
+    public StringProperty ResumeProperty() {
         return resume;
     }
 

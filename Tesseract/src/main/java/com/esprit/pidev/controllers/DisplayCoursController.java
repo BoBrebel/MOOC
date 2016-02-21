@@ -125,7 +125,7 @@ public class DisplayCoursController implements Initializable {
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
 
-            // Set the person into the controller.
+            // Set the cours into the controller.
             EditCoursController controller = loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setCours(cours);
@@ -155,7 +155,7 @@ public class DisplayCoursController implements Initializable {
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
 
-            // Set the person into the controller.
+            // Set the cours into the controller.
             AddCoursController controller = loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setCours(cours);
@@ -184,7 +184,7 @@ public class DisplayCoursController implements Initializable {
 
     /**
      * Called when the user clicks the edit button. Opens a dialog to edit
-     * details for the selected person.
+     * details for the selected cours.
      */
     @FXML
     private void handleEditCours(){
@@ -201,7 +201,7 @@ public class DisplayCoursController implements Initializable {
             alert.initOwner(primaryStage);
             alert.setTitle("No Selection");
             alert.setHeaderText("No Cours Selected");
-            alert.setContentText("Please select a person in the table.");
+            alert.setContentText("Please select a cours in the table.");
 
             alert.showAndWait();
         }
@@ -230,12 +230,26 @@ public class DisplayCoursController implements Initializable {
     
     @FXML
     private void handleAfficherChapitre(){
-        showChapitreDialog(Integer.parseInt(idDisplayCourLabel.getText()));
+        Cours selectedCours = coursDisplayCourTable.getSelectionModel().getSelectedItem();
+        if (selectedCours != null) {
+            showChapitreDialog(Integer.parseInt(idDisplayCourLabel.getText()));
+        } else {
+            // Nothing selected.
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(primaryStage);
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Chapitre Selected");
+            alert.setContentText("Please select a cours in the table.");
+
+            alert.showAndWait();
+        }
+        
     }
 
     private void showChapitreDialog(int id) {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
+            System.out.println("hello");
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/fxml/displayChapitre.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
@@ -249,7 +263,7 @@ public class DisplayCoursController implements Initializable {
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
 
-            // Set the person into the controller.
+            // Set the cours into the controller.
             DisplayChapitreController controller = loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setChapitres(id);

@@ -53,6 +53,26 @@ public class DisplayChapitreController implements Initializable {
     public void setChapitres(int id){
         chapitreDAO=new ImplChapitreDAO();
         chapitreDisplayChapitreTable.setItems(chapitreDAO.displayChapitre(id));
+        nomDisplayChapitreColumn.setCellValueFactory(cellData -> cellData.getValue().NomProperty());
+        numeroDisplayChapitreColumn.setCellValueFactory(cellData -> cellData.getValue().NumeroProperty().asString());
+        showChapitreDetails(null);
+        chapitreDisplayChapitreTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showChapitreDetails(newValue));
+    }
+    private void showChapitreDetails(Chapitre chapitre) {
+        if (chapitre != null) {
+            // Fill the labels with info from the cours object.
+            idDisplayChapitreLabel.setText(Integer.toString(chapitre.getId()));
+            nomDisplayChapitreLabel.setText(chapitre.getNom());
+            descriptionDisplayChapitreLabel.setText(chapitre.getDescription());
+            resumeDisplayChapitreLabel.setText(chapitre.getResume());
+
+        } else {
+            // Cours is null, remove all the text.
+            idDisplayChapitreLabel.setText("-");
+            nomDisplayChapitreLabel.setText("-");
+            descriptionDisplayChapitreLabel.setText("-");
+            resumeDisplayChapitreLabel.setText("-");
+        }
     }
     
 }
