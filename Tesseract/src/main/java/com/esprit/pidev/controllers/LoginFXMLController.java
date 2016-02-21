@@ -5,6 +5,7 @@
  */
 package com.esprit.pidev.controllers;
 
+import com.esprit.pidev.models.daos.interfaces.implementations.ImplUserDAO;
 import com.esprit.pidev.models.database.DataSource;
 import java.net.URL;
 import java.sql.Connection;
@@ -26,7 +27,7 @@ import javafx.scene.control.TextField;
  */
 public class LoginFXMLController implements Initializable {
     
-    
+    ImplUserDAO UserDAO;
     
     
     @FXML
@@ -39,7 +40,7 @@ public class LoginFXMLController implements Initializable {
     private Label lblcnx;
     @FXML
     private void btnLogin(ActionEvent event){
-        if(txtusername.getText().equals("bob") && txtpassword.getText().equals("bob")){
+        if(UserDAO.authenticateUser(txtusername.getText(),txtpassword.getText())){
         lbllogin.setText("HELLO");
         }
         else{
