@@ -7,6 +7,7 @@ package com.esprit.pidev.controllers;
 
 import com.esprit.pidev.models.daos.interfaces.implementations.ImplUserDAO;
 import com.esprit.pidev.models.database.DataSource;
+import com.esprit.pidev.models.enums.Role;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -40,7 +41,8 @@ public class LoginFXMLController implements Initializable {
     private Label lblcnx;
     @FXML
     private void btnLogin(ActionEvent event){
-        if(UserDAO.authenticateUser(txtusername.getText(),txtpassword.getText())){
+        String auth=UserDAO.authenticateUser(txtusername.getText(),txtpassword.getText());
+        if(auth.equals("ADM")){
         lbllogin.setText("HELLO");
         }
         else{
@@ -61,7 +63,7 @@ public class LoginFXMLController implements Initializable {
                 lblcnx.setText("no connection");
             }
             else{
-                lblcnx.setText("connection succesfull");
+                lblcnx.setText("connection successful");
             }
         } catch (SQLException ex) {
             Logger.getLogger(LoginFXMLController.class.getName()).log(Level.SEVERE, null, ex);

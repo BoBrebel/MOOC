@@ -5,11 +5,14 @@
  */
 package com.esprit.pidev.models.daos.interfaces;
 
+import com.esprit.pidev.models.entities.Utilisateur;
+import com.esprit.pidev.models.enums.Role;
+
 /**
  *
  * @author BoB
  */
 public interface IUserDAO {
     
-    public boolean authenticateUser(String userName,String Pwd);
+    public String authenticateUser(String userName,String Pwd);
 }
