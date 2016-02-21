@@ -79,6 +79,7 @@
                         <ImageView fx:id="badgeDisplayCourImageView" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                      </children>
                   </GridPane>
+                  <Button mnemonicParsing="false" text="Afficher la liste des chapitres associés" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0" />
                </children>
             </AnchorPane>
         </items>

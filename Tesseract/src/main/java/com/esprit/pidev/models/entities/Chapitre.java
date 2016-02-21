@@ -2,133 +2,118 @@
 package com.esprit.pidev.models.entities;
 
 import java.util.List;
+import javafx.beans.property.*;
 
 
 public class Chapitre {
-   private int idChapitre ; 
-   private int idCours ;
-   private String nom ;
-   private int numero ; 
-   private String description ;
-   private String resume ;
-   private List<Objectif>  listObjectif ;
+   private final IntegerProperty id; 
+   private final IntegerProperty idCours ;
+   private final StringProperty nom ;
+   private final IntegerProperty numero ; 
+   private final StringProperty description ;
+   private final StringProperty resume ;
    
+   public Chapitre(){
+       this(-1,-1,null,-1,null,null);
+   }
 
-    public Chapitre(int idChapitre, int idCours, String nom, int numero, String description, String resume) {
-        this.idChapitre = idChapitre;
-        this.idCours = idCours;
-        this.nom = nom;
-        this.numero = numero;
-        this.description = description;
-        this.resume = resume;
+   /**
+    * Constructor with initial data.
+    * 
+    * @param id
+    * @param idCours
+    * @param nom
+    * @param numero
+    * @param description
+    * @param resume
+    */
+   public Chapitre(int id, int idCours, String nom, int numero, String description, String resume) {
+        this.id = new SimpleIntegerProperty(id);
+        this.idCours = new SimpleIntegerProperty(idCours);
+        this.nom = new SimpleStringProperty(nom);
+        this.numero = new SimpleIntegerProperty(numero);
+        this.description = new SimpleStringProperty(description);
+        this.resume = new SimpleStringProperty(resume);
     }
 
-    public Chapitre(int idChapitre, int idCours, String nom, int numero, String description, String resume, List<Objectif> listObjectif) {
-        this.idChapitre = idChapitre;
-        this.idCours = idCours;
-        this.nom = nom;
-        this.numero = numero;
-        this.description = description;
-        this.resume = resume;
-        this.listObjectif = listObjectif;
-    }
-     
-
-    public Chapitre(String nom, int numero, String description, String resume) {
-        this.nom = nom;
-        this.numero = numero;
-        this.description = description;
-        this.resume = resume;
+    public IntegerProperty getIdProperty() {
+        return id;
     }
 
-    public Chapitre() {
-    }
-
-    public int getIdChapitre() {
-        return idChapitre;
-    }
-
-    public void setIdChapitre(int idChapitre) {
-        this.idChapitre = idChapitre;
-    }
-
-    public int getIdCours() {
+    public IntegerProperty getIdCoursProperty() {
         return idCours;
     }
 
-    public void setIdCours(int idCours) {
-        this.idCours = idCours;
-    }
-
-    public String getNom() {
+    public StringProperty getNomProperty() {
         return nom;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public int getNumero() {
+    public IntegerProperty getNumeroProperty() {
         return numero;
     }
 
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
-
-    public String getDescription() {
+    public StringProperty getDescriptionProperty() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getResume() {
+    public StringProperty getResumeProperty() {
         return resume;
     }
 
-    public void setResume(String resume) {
-        this.resume = resume;
+    public int getId() {
+        return id.get();
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + this.idChapitre;
-        return hash;
+    public int getIdCours() {
+        return idCours.get();
     }
 
-    public List<Objectif> getListObjectif() {
-        return listObjectif;
+    public String getNom() {
+        return nom.get();
     }
 
-    public void setListObjectif(List<Objectif> listObjectif) {
-        this.listObjectif = listObjectif;
+    public int getNumero() {
+        return numero.get();
+    }
+
+    public String getDescription() {
+        return description.get();
+    }
+
+    public String getResume() {
+        return resume.get();
     }
     
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Chapitre other = (Chapitre) obj;
-        if (this.idChapitre != other.idChapitre) {
-            return false;
-        }
-        return true;
+    public void setId(int id) {
+        this.id.set(id);
     }
-
-    @Override
-    public String toString() {
-        return "Chapitre{" + "idChapitre=" + idChapitre + ", idCours=" + idCours + ", nom=" + nom + ", numero=" + numero + ", description=" + description + ", resume=" + resume + ", listObjectif=" + listObjectif + '}';
+    
+    public void setIdCours(int idCours) {
+        this.id.set(idCours);
     }
-
-   
+    
+    public void setNumero(int numero) {
+        this.numero.set(numero);
+    }
+    
+    public void setNom(String nom) {
+        this.nom.set(nom);
+    }
+    
+    public void setDescription(String description) {
+        this.description.set(description);
+    }
+    
+    public void setResume(String resume) {
+        this.resume.set(resume);
+    }
+    
+    
+    
+    
+    
+    
+    
    
    
 }
