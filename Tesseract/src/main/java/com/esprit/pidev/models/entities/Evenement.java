@@ -9,7 +9,7 @@ import java.util.Objects;
 
 /**
  *
- * @author haikal
+ * @author Choukou_Tracker
  */
 public class Evenement {
     private int idEvenement;

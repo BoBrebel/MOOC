@@ -10,7 +10,7 @@ import java.util.Objects;
 
 /**
  *
- * @author haikal
+ * @author Choukou_Tracker
  */
 public class SujetForum {
     private int id;
