@@ -104,12 +104,66 @@ public class ImplCommentaireForumDAO implements ICommentaireForumDAO{
 
     @Override
     public List<CommentaireForum> getCommentaireForumBySujet(SujetForum sujetf) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                 ArrayList<CommentaireForum> liste = new ArrayList<CommentaireForum>();
+        String query = "select * from commentaire_forum where id_sujet=?";   
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, sujetf.getId());
+            ResultSet resultat = statement.executeQuery();
+            while (resultat.next()) {
+                CommentaireForum sj=new CommentaireForum();
+                ImplUtilisateurDAO ud=new ImplUtilisateurDAO();               
+                Utilisateur usr = (Utilisateur) ud.getUtilisateurByID(resultat.getInt(2));
+                SujetForum s=new SujetForum();
+                ImplSujetForumDAO cs=new ImplSujetForumDAO();
+                s=cs.getSujetForum(resultat.getInt(3));
+                sj.setId(resultat.getInt(1));
+                sj.setUtilisateur(usr);
+                sj.setSujetforum(s);
+                sj.setContenu(resultat.getString(4));
+                sj.setDate(resultat.getDate(5));
+                liste.add(sj);
+            }
+            return liste;
+        } catch (SQLException ex) {
+            //Logger.getLogger(PersonneDao.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("______________________________________ERROR______________________________________");
+            System.out.println("erreur lors du chargement des Logs " + ex.getMessage());
+            System.out.println("______________________________________ERROR______________________________________");
+            return null;
+        }
     }
 
     @Override
     public List<CommentaireForum> getCommentaireForumByUtilisateur(Utilisateur user) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                     ArrayList<CommentaireForum> liste = new ArrayList<CommentaireForum>();
+        String query = "select * from commentaire_forum where id_utilisateur=?";   
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, user.getIdUtilisateur());
+            ResultSet resultat = statement.executeQuery();
+            while (resultat.next()) {
+                CommentaireForum sj=new CommentaireForum();
+                ImplUtilisateurDAO ud=new ImplUtilisateurDAO();               
+                Utilisateur usr = (Utilisateur) ud.getUtilisateurByID(resultat.getInt(2));
+                SujetForum s=new SujetForum();
+                ImplSujetForumDAO cs=new ImplSujetForumDAO();
+                s=cs.getSujetForum(resultat.getInt(3));
+                sj.setId(resultat.getInt(1));
+                sj.setUtilisateur(usr);
+                sj.setSujetforum(s);
+                sj.setContenu(resultat.getString(4));
+                sj.setDate(resultat.getDate(5));
+                liste.add(sj);
+            }
+            return liste;
+        } catch (SQLException ex) {
+            //Logger.getLogger(PersonneDao.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("______________________________________ERROR______________________________________");
+            System.out.println("erreur lors du chargement des Logs " + ex.getMessage());
+            System.out.println("______________________________________ERROR______________________________________");
+            return null;
+        }
     }
     
 }
