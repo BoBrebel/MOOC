@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.sql.Date;
 import java.util.List;
 
-public abstract class Utilisateur {
+public  class Utilisateur {
 
     protected int idUtilisateur;
 

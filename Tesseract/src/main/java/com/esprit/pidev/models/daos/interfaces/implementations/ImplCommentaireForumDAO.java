@@ -6,9 +6,11 @@
 package com.esprit.pidev.models.daos.interfaces.implementations;
 
 import com.esprit.pidev.models.daos.interfaces.ICommentaireForumDAO;
+import com.esprit.pidev.models.database.DataSource;
 import com.esprit.pidev.models.entities.CommentaireForum;
 import com.esprit.pidev.models.entities.SujetForum;
 import com.esprit.pidev.models.entities.Utilisateur;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -17,7 +19,12 @@ import java.util.List;
  * @author 
  */
 public class ImplCommentaireForumDAO implements ICommentaireForumDAO{
+    private Connection connection;
 
+    public ImplCommentaireForumDAO() {
+        connection = DataSource.getInstance().getConnection();
+    }
+    
     @Override
     public boolean addCommentaireForum(CommentaireForum cmntfrm) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
