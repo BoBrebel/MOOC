@@ -14,7 +14,9 @@ public interface ISujetForumDAO {
     public boolean deleteSujetForum(int idSujet) throws SQLException;
     
     public boolean updateSujetForum(SujetForum sujetf)throws SQLException;
-        
+    
+    public SujetForum getSujetForum(int id)throws SQLException;
+    
     public ArrayList<SujetForum> displaySujetForum()throws SQLException;
     
     public ArrayList<SujetForum> displayByUtilisateur(Utilisateur utilisateur)throws SQLException;

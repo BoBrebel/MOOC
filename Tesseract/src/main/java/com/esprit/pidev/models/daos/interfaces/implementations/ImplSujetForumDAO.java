@@ -34,7 +34,7 @@ public class ImplSujetForumDAO implements ISujetForumDAO{
     
     @Override
     public boolean addSujetForum(SujetForum sujetf) throws SQLException {
-        System.out.println(sujetf.toString());
+        
         String query = "Insert into sujet_forum(`id_utilisateur`,`id_matiere`, `titre`, `description`, `date`) "
                 + "values (?, ?, ?, ?,?);";
         try {
@@ -80,13 +80,11 @@ public class ImplSujetForumDAO implements ISujetForumDAO{
     @SuppressWarnings("empty-statement")
     public ArrayList<SujetForum> displaySujetForum() throws SQLException {
         ArrayList<SujetForum> liste = new ArrayList<SujetForum>();
-        String query = "select * from sujet_forum";
-        
+        String query = "select * from sujet_forum";   
         try {
             Statement statement = connection.createStatement();
             ResultSet resultat = statement.executeQuery(query);
             while (resultat.next()) {
-                System.out.println("new sujet!");
                 SujetForum sj=new SujetForum();
                 ImplUtilisateurDAO ud=new ImplUtilisateurDAO();               
                 Utilisateur usr = (Utilisateur) ud.getUtilisateurByID(resultat.getInt(2));
@@ -114,8 +112,7 @@ public class ImplSujetForumDAO implements ISujetForumDAO{
     @Override
     public ArrayList<SujetForum> displayByUtilisateur(Utilisateur utilisateur) throws SQLException {
          ArrayList<SujetForum> liste = new ArrayList<SujetForum>();
-        String query = "select * from sujet_forum where id_utilisateur=?";
-        
+        String query = "select * from sujet_forum where id_utilisateur=?";    
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, utilisateur.getIdUtilisateur());
@@ -149,11 +146,9 @@ public class ImplSujetForumDAO implements ISujetForumDAO{
     public ArrayList<SujetForum> searchSujetForum(String rch) throws SQLException {
         ArrayList<SujetForum> liste = new ArrayList<SujetForum>();
         liste=this.displaySujetForum();
-        System.out.println("size_liste1="+liste.size());
         for(int i = 0;i<liste.size();i++){
             System.out.println(liste.get(i).getTitre());
             if(compareStrings(liste.get(i).getTitre(), rch)<0.5){
-                System.out.println("is not ");
             liste.remove(liste.get(i));
             i--;
                 
@@ -165,8 +160,7 @@ public class ImplSujetForumDAO implements ISujetForumDAO{
     @Override
     public ArrayList<SujetForum> displayByMatiere(Matiere m) throws SQLException {
                  ArrayList<SujetForum> liste = new ArrayList<SujetForum>();
-        String query = "select * from sujet_forum where id_matiere=?";
-        
+        String query = "select * from sujet_forum where id_matiere=?";      
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, m.getIdMatiere());
@@ -198,6 +192,37 @@ public class ImplSujetForumDAO implements ISujetForumDAO{
     private static double compareStrings(String stringA, String stringB) {
         JaroWinkler algorithm = new JaroWinkler();
         return algorithm.getSimilarity(stringA, stringB);
+    }
+
+    @Override
+    public SujetForum getSujetForum(int id) throws SQLException {
+        String query = "select * from sujet_forum where id=?";      
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
+            ResultSet resultat = ps.executeQuery();
+            resultat.next();
+            SujetForum sj=new SujetForum();
+            ImplUtilisateurDAO ud=new ImplUtilisateurDAO();               
+            Utilisateur usr = (Utilisateur) ud.getUtilisateurByID(resultat.getInt(2));
+            ImplMatiereDAO md=new ImplMatiereDAO();
+                Matiere mt=new Matiere();
+                mt=md.findMatiereById(resultat.getInt(3));
+                sj.setId(resultat.getInt(1));
+                sj.setUtilisateur(usr);
+                sj.setMatiere(mt);
+                sj.setTitre(resultat.getString(4));
+                sj.setDescription(resultat.getString(5));
+                sj.setDate(resultat.getDate(6));
+               return sj;
+            
+        } catch (SQLException ex) {
+            //Logger.getLogger(PersonneDao.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("______________________________________ERROR______________________________________");
+            System.out.println("erreur lors du chargement des Logs " + ex.getMessage());
+            System.out.println("______________________________________ERROR______________________________________");
+            return null;
+        }
     }
     
 }
