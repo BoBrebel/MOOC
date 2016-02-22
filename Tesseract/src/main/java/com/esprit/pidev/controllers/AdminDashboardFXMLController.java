@@ -8,20 +8,23 @@ package com.esprit.pidev.controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.BorderPane;
 
 /**
  * FXML Controller class
  *
  * @author BoB
  */
-public class AdminDashboardFXMLController implements Initializable {
-
+public class AdminDashBoardFXMLController implements Initializable {
+        BorderPane boder = new BorderPane();
+        
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
     }    
     
 }

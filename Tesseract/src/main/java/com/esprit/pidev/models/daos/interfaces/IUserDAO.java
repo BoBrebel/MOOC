@@ -14,5 +14,5 @@ import com.esprit.pidev.models.enums.Role;
  */
 public interface IUserDAO {
     
-    public String authenticateUser(String userName,String Pwd);
+    public void authenticateUser(String userName,String Pwd);
 }
