@@ -89,7 +89,7 @@ public class Chapitre {
     }
     
     public void setIdCours(int idCours) {
-        this.id.set(idCours);
+        this.idCours.set(idCours);
     }
     
     public void setNumero(int numero) {

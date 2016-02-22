@@ -6,7 +6,7 @@ import javafx.collections.ObservableList;
 
 public interface IChapitreDAO {
     
-    public boolean addrChapitre(Chapitre c);
+    public boolean addChapitre(Chapitre c);
     
     public boolean deleteChapitre(int id);
     
@@ -15,4 +15,6 @@ public interface IChapitreDAO {
     public ObservableList<Chapitre> displayChapitre(int idCours);
     
     public Chapitre searchChapitre(String nom, int idCours);
+    
+    public boolean isNumberThere(int number, int idCours);
 }

@@ -30,10 +30,11 @@ public class ImplChapitreDAO implements IChapitreDAO{
         cnx = DataSource.getInstance().getConnection();
     }
     @Override
-    public boolean addrChapitre(Chapitre c) {
+    public boolean addChapitre(Chapitre c) {
         String request ="INSERT INTO chapitre (id_cours, nom, numero, description, resume) VALUES(?,?,?,?,?)";
         try {
             PreparedStatement ps = cnx.prepareStatement(request);
+            System.out.println(c.getIdCours());
             ps.setInt(1, c.getIdCours());
             ps.setString(2, c.getNom());
             ps.setInt(3, c.getNumero());
@@ -85,7 +86,7 @@ public class ImplChapitreDAO implements IChapitreDAO{
     @Override
     public ObservableList<Chapitre> displayChapitre(int idCours) {
         ObservableList<Chapitre> listeChapitre = FXCollections.observableArrayList();
-        String request = "SELECT * FROM chapitre WHERE id_cours=?";
+        String request = "SELECT * FROM chapitre WHERE id_cours=? ORDER BY numero";
         try {
             PreparedStatement ps = cnx.prepareStatement(request);
             ps.setInt(1, idCours);
@@ -131,5 +132,30 @@ public class ImplChapitreDAO implements IChapitreDAO{
         
         return c;
     }
-    
+
+    @Override
+    public boolean isNumberThere(int number, int idCours) {
+        Chapitre c = new Chapitre();
+        String request = "SELECT * FROM chapitre WHERE id_cours=? and numero=?";
+        PreparedStatement ps;
+        try {
+            ps = cnx.prepareStatement(request);
+            ps.setInt(1, idCours);
+            ps.setInt(2, number);
+            ResultSet res=ps.executeQuery();
+            while (res.next()){
+                c.setId(res.getInt(1));
+                c.setIdCours(res.getInt(2));
+                c.setNom(res.getString(3));
+                c.setNumero(res.getInt(4));
+                c.setDescription(res.getString(5));
+                c.setResume(res.getString(6));
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ImplChapitreDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
 }
