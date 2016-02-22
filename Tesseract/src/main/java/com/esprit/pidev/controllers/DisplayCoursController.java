@@ -67,6 +67,7 @@ public class DisplayCoursController implements Initializable {
     
     private ImplCoursDAO coursDAO;
     private Window primaryStage;
+    private int idFormateur;
     /**
      * Initializes the controller class.
      */
@@ -238,7 +239,7 @@ public class DisplayCoursController implements Initializable {
             Alert alert = new Alert(AlertType.WARNING);
             alert.initOwner(primaryStage);
             alert.setTitle("No Selection");
-            alert.setHeaderText("No Chapitre Selected");
+            alert.setHeaderText("No Cour Selected");
             alert.setContentText("Please select a cours in the table.");
 
             alert.showAndWait();

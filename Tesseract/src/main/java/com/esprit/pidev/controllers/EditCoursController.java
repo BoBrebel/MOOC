@@ -83,7 +83,6 @@ public class EditCoursController implements Initializable {
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
     }
-    
     public void setCours(Cours cours){
         this.cours=cours;
         if (cours.getNomCours()!=null){

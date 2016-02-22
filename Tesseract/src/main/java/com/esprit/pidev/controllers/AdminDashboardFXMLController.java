@@ -16,8 +16,7 @@ import javafx.scene.layout.BorderPane;
  * @author BoB
  */
 public class AdminDashBoardFXMLController implements Initializable {
-        BorderPane boder = new BorderPane();
-        
+
     /**
      * Initializes the controller class.
      */

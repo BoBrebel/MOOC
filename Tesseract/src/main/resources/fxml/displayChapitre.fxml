@@ -28,9 +28,9 @@
                <children>
                   <ToolBar prefHeight="42.0" prefWidth="627.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <items>
-                        <Button mnemonicParsing="false" text="Ajouter..." />
-                        <Button mnemonicParsing="false" text="Modifier..." />
-                        <Button mnemonicParsing="false" text="Supprimer" />
+                        <Button mnemonicParsing="false" onAction="#handleAddChapitre" text="Ajouter..." />
+                        <Button mnemonicParsing="false" onAction="#handleEditChapitre" text="Modifier..." />
+                        <Button mnemonicParsing="false" onAction="#handleDeleteChapitre" text="Supprimer" />
                      </items>
                   </ToolBar>
                   <GridPane prefHeight="367.0" prefWidth="496.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="100.0">
@@ -79,6 +79,7 @@
                      </children>
                   </GridPane>
                   <Label text="Détail du Chapitre" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                  <Button mnemonicParsing="false" onAction="#handleAfficherObjectif" text="Afficher la liste des objectifs associés" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0" />
                </children>
             </AnchorPane>
         </items>

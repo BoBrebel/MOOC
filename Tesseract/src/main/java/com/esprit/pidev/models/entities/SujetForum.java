@@ -15,6 +15,7 @@ import java.util.Objects;
 public class SujetForum {
     private int id;
     private Utilisateur utilisateur;
+    private Matiere matiere;
     private String titre;
     private String description;
     private Date date;
@@ -22,9 +23,10 @@ public class SujetForum {
     public SujetForum() {
     }
 
-    public SujetForum(int id, Utilisateur utilisateur, String titre, String description, Date date) {
+    public SujetForum(int id, Utilisateur utilisateur,Matiere matiere, String titre, String description, Date date) {
         this.id = id;
         this.utilisateur = utilisateur;
+        this.matiere =matiere;
         this.titre = titre;
         this.description = description;
         this.date = date;
@@ -37,7 +39,10 @@ public class SujetForum {
     public void setUtilisateur(Utilisateur utilisateur) {
         this.utilisateur = utilisateur;
     }
-
+    public void setMatiere(Matiere matiere) {
+        this.matiere = matiere;
+    }
+    
     public void setTitre(String titre) {
         this.titre = titre;
     }
@@ -58,6 +63,10 @@ public class SujetForum {
         return utilisateur;
     }
 
+    public Matiere getMatiere() {
+        return matiere;
+    }
+    
     public String getTitre() {
         return titre;
     }
@@ -69,7 +78,7 @@ public class SujetForum {
     public Date getDate() {
         return date;
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 7;
@@ -99,10 +108,14 @@ public class SujetForum {
         return true;
     }
 
+   
+
     @Override
     public String toString() {
-        return "SujetForum{" + "id=" + id + ", utilisateur=" + utilisateur + ", titre=" + titre + ", description=" + description + ", date=" + date + '}';
+        return "SujetForum{" + "id=" + id + ", utilisateur=" + utilisateur.getIdUtilisateur() + ", matiere=" + matiere.getNomMatiere() + ", titre=" + titre + ", description=" + description + ", date=" + date + '}';
     }
+
+    
     
     
 }
