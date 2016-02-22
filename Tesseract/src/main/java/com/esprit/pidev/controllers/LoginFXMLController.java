@@ -51,7 +51,7 @@ public class LoginFXMLController implements Initializable {
         String role=UserDAO.getRole();
         int id=UserDAO.getId();
         if(role.equals("ADM")){
-        Parent parent=FXMLLoader.load(getClass().getResource("/fxml/AdminDashboardFXML.fxml"));
+        Parent parent=FXMLLoader.load(getClass().getResource("/fxml/AdminDashBoardFXML.fxml"));
             System.out.println(id);
             showWindow(parent, event);
         }
