@@ -79,6 +79,7 @@
                      </children>
                   </GridPane>
                   <Label text="Détail du Chapitre" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                  <Button mnemonicParsing="false" onAction="#handleAfficherObjectif" text="Afficher la liste des objectifs associés" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0" />
                </children>
             </AnchorPane>
         </items>

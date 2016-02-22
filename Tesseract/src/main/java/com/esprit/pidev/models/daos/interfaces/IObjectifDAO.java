@@ -9,6 +9,7 @@ package com.esprit.pidev.models.daos.interfaces;
 import com.esprit.pidev.models.entities.Objectif;
 import java.sql.SQLException;
 import java.util.List;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -16,16 +17,18 @@ import java.util.List;
  */
 public interface IObjectifDAO {
 
-    boolean createObjectif(Objectif objectif) throws SQLException;
+    public boolean addObjectif(Objectif o);
 
-    boolean removeObjectif(Objectif objectif) throws SQLException;
+    public boolean deleteObjectif(int id);
 
-    boolean removeObjectifByname(String nomObjectif) throws SQLException;
+    public boolean updateObjectif(Objectif o);
 
-    boolean updateObjectif(String nomObjectif, Objectif objectif) throws SQLException;
+    public ObservableList<Objectif> displayObjectifs(int idChapitre);
 
-    List<Objectif> displayObjectifs() throws SQLException;
-
-    Objectif getObjectifByName(String nomObjectif) throws SQLException;
+    public Objectif searchObjectif(String nom, int idChapitre);
+    
+    public boolean isNumberThere(int number, int idChapitre);
+    
+    
 
 }

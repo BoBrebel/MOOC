@@ -204,4 +204,50 @@ public class DisplayChapitreController implements Initializable {
         }
     }
     
+    @FXML
+    private void handleAfficherObjectif(){
+        Chapitre selectedChapitre = chapitreDisplayChapitreTable.getSelectionModel().getSelectedItem();
+        if (selectedChapitre != null) {
+            showObjectifDialog(selectedChapitre.getId());
+        } else {
+            // Nothing selected.
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(primaryStage);
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Chapitre Selected");
+            alert.setContentText("Please select a cours in the table.");
+
+            alert.showAndWait();
+        }
+    }
+
+    private void showObjectifDialog(int id) {
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            System.out.println("hello");
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("/fxml/displayObjectif.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Objectif");
+            dialogStage.initModality(Modality.APPLICATION_MODAL);
+            dialogStage.initStyle(StageStyle.UTILITY);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the cours into the controller.
+            DisplayObjectifController control = loader.getController();
+            control.setDialogStage(dialogStage);
+            control.setObjectif(id);
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
