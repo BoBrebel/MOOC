@@ -20,28 +20,44 @@ import java.sql.SQLException;
 public class ImplUserDAO implements IUserDAO {
      private Connection connection;
      private String role;
+     private int id;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+     
 
     public ImplUserDAO() {
         connection = DataSource.getInstance().getConnection();
     }
 
     @Override
-    public String authenticateUser(String userName, String Pwd) {
-        String query = "select role from utilisateur where pseudo='"+ userName +"' and mdp='"+ Pwd +"'";
+    public void authenticateUser(String userName, String Pwd) {
+        String query = "select role,id from utilisateur where pseudo='"+ userName +"' and mdp='"+ Pwd +"'";
         
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet resultat = ps.executeQuery();
             while (resultat.next()) {
-            role=resultat.getString(1);
-            
-            
+                setRole(resultat.getString(1));
+                setId(resultat.getInt(2));
         }
-         return role;   
         } 
         catch (SQLException ex) {
             System.out.println("erreur lors de la recherche du user " + ex.getMessage());
-            return null;
+            
         }
     }
     

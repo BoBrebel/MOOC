@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
  *
  * @author BoB
  */
-public class AdminDashboardFXMLController implements Initializable {
+public class AdminDashBoardFXMLController implements Initializable {
 
     /**
      * Initializes the controller class.
