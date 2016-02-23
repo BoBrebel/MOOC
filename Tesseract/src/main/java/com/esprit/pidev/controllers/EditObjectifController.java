@@ -17,7 +17,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -27,20 +26,18 @@ import javafx.stage.Stage;
  *
  * @author Bacem
  */
-public class AddObjectifController implements Initializable {
-    @FXML
-    private Label idCoursAddObjectifLabel;
-    @FXML
-    private TextField nomAddObjectifTextField;
-    @FXML
-    private TextField numeroAddObjectifTextField;
-    @FXML
-    private TextArea descriptionAddObjectifTextArea;
-    @FXML
-    private ComboBox <Difficulte> difficulteAddObjectifComboBox;
+public class EditObjectifController implements Initializable {
     
+    @FXML
+    private ComboBox <Difficulte> difficulteEditObjectifComboBox;
+    @FXML
+    private TextField nomEditObjectifTextField;
+    @FXML
+    private TextField numeroEditObjectifTextField;
+    @FXML
+    private TextArea descriptionEditObjectifTextArea;
     private Stage dialogStage;
-    private boolean ajouterClicked = false;
+    private boolean modifierClicked;
     private Objectif objectif;
 
     /**
@@ -52,42 +49,49 @@ public class AddObjectifController implements Initializable {
     }    
 
     void setDialogStage(Stage dialogStage) {
-        this.dialogStage=dialogStage;
+        this.dialogStage = dialogStage;
     }
 
-    void setObjectif(Objectif objectif, int id) {
+    void setObjectif(Objectif objectif, int idChapitre) {
         this.objectif=objectif;
-        objectif.setIdChapitre(id);
-        difficulteAddObjectifComboBox.setItems( FXCollections.observableArrayList( Difficulte.values()));
+        this.objectif.setIdChapitre(idChapitre);
+        if(objectif.getNom()!=null){
+            nomEditObjectifTextField.setText(objectif.getNom());
+            numeroEditObjectifTextField.setText(Integer.toString(objectif.getNumero()));
+            difficulteEditObjectifComboBox.setItems( FXCollections.observableArrayList( Difficulte.values()));
+            difficulteEditObjectifComboBox.setValue(objectif.getDifficulte());
+            descriptionEditObjectifTextArea.setText(objectif.getDescription());
+        }
     }
 
     boolean isOkClicked() {
-        return ajouterClicked;
+        return modifierClicked;
     }
-    
     @FXML
-    private void handleAjouter(){
-        if (isInputValid()){
+    private void handleModifier(){
+        if (isInputValid()) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Ajout !!!");
-            alert.setContentText("Etes vous sur de bien vouloir ajouter le cours '"+nomAddObjectifTextField.getText()+"'");
+            alert.setTitle("Modification !!!");
+            alert.setContentText("Etes vous sur de bien vouloir modifier le cours '"+nomEditObjectifTextField.getText()+"'");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK){
-                objectif.setNom(nomAddObjectifTextField.getText());
-                objectif.setNumero(Integer.parseInt(numeroAddObjectifTextField.getText()));
-                objectif.setDescription(descriptionAddObjectifTextArea.getText());
-                objectif.setDifficulte(difficulteAddObjectifComboBox.getValue());
+                objectif.setDifficulte(difficulteEditObjectifComboBox.getValue());
+                objectif.setNom(nomEditObjectifTextField.getText());
+                objectif.setDescription(descriptionEditObjectifTextArea.getText());
+                objectif.setNumero(Integer.parseInt(numeroEditObjectifTextField.getText()));
+                
                 ImplObjectifDAO objectifDAO = new ImplObjectifDAO();
-                objectifDAO.addObjectif(objectif);
-                ajouterClicked = true;
+                objectifDAO.updateObjectif(objectif);
                 dialogStage.close();
             }
         }
     }
+    
     @FXML
     private void handleAnnuler() {
         dialogStage.close();
     }
+    
     public static boolean isNumeric(String str)
     {
         for (char c : str.toCharArray())
@@ -100,17 +104,22 @@ public class AddObjectifController implements Initializable {
         String errorMessage = "";
         ImplObjectifDAO chapitreDAO = new ImplObjectifDAO();
 
-        if (nomAddObjectifTextField.getText() == null || nomAddObjectifTextField.getText().length() == 0) {
+        if (nomEditObjectifTextField.getText() == null || nomEditObjectifTextField.getText().length() == 0) {
             errorMessage += "Nom Invalide!\n"; 
         }
-        if (!isNumeric(numeroAddObjectifTextField.getText()) || numeroAddObjectifTextField.getText().length()==0 || Integer.parseInt(numeroAddObjectifTextField.getText())==0) {
+        if (!isNumeric(numeroEditObjectifTextField.getText()) || numeroEditObjectifTextField.getText().length()==0 || Integer.parseInt(numeroEditObjectifTextField.getText())==0) {
             errorMessage += "Numéro invalide!\n"; 
         }
-        if (chapitreDAO.isNumberThere(Integer.parseInt(numeroAddObjectifTextField.getText()),objectif.getIdChapitre())){
-            errorMessage += "Numéro existant!\n";
+        if (isNumeric(numeroEditObjectifTextField.getText())){
+            if (chapitreDAO.isNumberThere(Integer.parseInt(numeroEditObjectifTextField.getText()),objectif.getIdChapitre())){
+                errorMessage += "Numéro existant!\n";
+            }
         }
-        if (descriptionAddObjectifTextArea.getText() == null || descriptionAddObjectifTextArea.getText().length()==0) {
+        if (descriptionEditObjectifTextArea.getText() == null || descriptionEditObjectifTextArea.getText().length()==0) {
             errorMessage += "Description invalide!\n"; 
+        }
+        if (difficulteEditObjectifComboBox.getValue() == null) {
+            errorMessage += "Difficulté invalide!\n"; 
         }
         if (errorMessage.length() == 0) {
             return true;

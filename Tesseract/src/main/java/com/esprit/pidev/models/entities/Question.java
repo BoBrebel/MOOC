@@ -5,53 +5,77 @@
  */
 package com.esprit.pidev.models.entities;
 
+import javafx.beans.property.*;
+
 /**
  *
  * @author Bacem
  */
 public class Question {
     
-    private int id;
-    private String question;
-    private int idEpreuve;
+    private final IntegerProperty id;
+    private final StringProperty question;
+    private final IntegerProperty idEpreuve;
 
+    public Question(){
+        this(-1,null,-1);
+    }
+    
+    /**
+     * Constructor with initial data.
+     * 
+     * @param id
+     * @param question 
+     * @param idEpreuve  
+     */
     public Question(int id, String question, int idEpreuve) {
-        this.id = id;
-        this.question = question;
-        this.idEpreuve = idEpreuve;
+        this.id = new SimpleIntegerProperty(id);
+        this.question = new SimpleStringProperty(question);
+        this.idEpreuve = new SimpleIntegerProperty(idEpreuve);
     }
 
     public int getIdEpreuve() {
-        return idEpreuve;
+        return idEpreuve.get();
     }
 
     public void setIdEpreuve(int idEpreuve) {
-        this.idEpreuve = idEpreuve;
+        this.idEpreuve.set(idEpreuve);
     }
-
-    public Question() {
-    }
-
+    
     public int getId() {
-        return id;
+        return id.get();
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.id.set(id);
     }
 
     public String getQuestion() {
-        return question;
+        return question.get();
     }
 
     public void setQuestion(String question) {
-        this.question = question;
+        this.question.set(question);
     }
+
+    public IntegerProperty idProperty() {
+        return id;
+    }
+
+    public StringProperty questionProperty() {
+        return question;
+    }
+
+    public IntegerProperty idEpreuveProperty() {
+        return idEpreuve;
+    }
+    
+    
 
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 53 * hash + this.id;
+        hash = 53 * hash + this.id.intValue();
         return hash;
     }
 

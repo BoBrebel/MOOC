@@ -1,6 +1,7 @@
 package com.esprit.pidev.models.entities;
 
 import com.esprit.pidev.models.enums.Difficulte;
+import com.esprit.pidev.models.enums.Etat;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
@@ -19,9 +20,12 @@ public class Cours {
     private final IntegerProperty idMatiere;
     private final StringProperty affiche;
     private final IntegerProperty idFormateur;
+    private final StringProperty video;
+    private final ObjectProperty<Etat> validation1;
+    private final ObjectProperty<Etat> validation2;
 
     public Cours(){
-        this(-1, null, null, null, null, -1, null, -1);
+        this(-1, null, null, null, null, -1, null, -1, null, null, null);
     }
     /**
      * Constructor with initial data.
@@ -36,7 +40,7 @@ public class Cours {
      * @param idFormateur 
      */
     
-    public Cours(int idCours, String badge, String nomCours, Difficulte difficulte, String descriptionCours, int idMatiere, String affiche, int idFormateur) {
+    public Cours(int idCours, String badge, String nomCours, Difficulte difficulte, String descriptionCours, int idMatiere, String affiche, int idFormateur, String video, Etat validation1, Etat validation2) {
         this.idCours = new SimpleIntegerProperty(idCours);
         this.badge = new SimpleStringProperty(badge);
         this.nomCours = new SimpleStringProperty(nomCours);
@@ -45,7 +49,40 @@ public class Cours {
         this.idMatiere = new SimpleIntegerProperty(idMatiere);
         this.affiche = new SimpleStringProperty(affiche);
         this.idFormateur = new SimpleIntegerProperty(idFormateur);
+        this.video = new SimpleStringProperty(video);
+        this.validation1 = new SimpleObjectProperty<>(validation1);
+        this.validation2 = new SimpleObjectProperty<>(validation2);
     }
+    public String getVideo() {
+        return video.get();
+    }
+    public void setVideo(String video) {
+        this.video.set(video);
+    }
+    public StringProperty videoProperty(){
+        return video;
+    }
+    
+    public Etat getValidation1() {
+        return validation1.get();
+    }
+    public void setValidation1(Etat validation1) {
+        this.validation1.set(validation1);
+    }
+    public ObjectProperty<Etat> validation1Property(){
+        return validation1;
+    }
+    
+    public Etat getValidation2() {
+        return validation2.get();
+    }
+    public void setValidation2(Etat validation2) {
+        this.validation2.set(validation2);
+    }
+    public ObjectProperty<Etat> validation2Property(){
+        return validation2;
+    }
+    
 
     public int getIdCours() {
         return idCours.get();

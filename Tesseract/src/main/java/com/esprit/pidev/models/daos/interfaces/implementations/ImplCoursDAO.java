@@ -11,6 +11,7 @@ import com.esprit.pidev.models.database.DataSource;
 import com.esprit.pidev.models.entities.Cours;
 import com.esprit.pidev.models.entities.Matiere;
 import com.esprit.pidev.models.enums.Difficulte;
+import com.esprit.pidev.models.enums.Etat;
 import java.sql.Connection;
 import java.sql.*;
 import java.util.ArrayList;
@@ -81,6 +82,10 @@ public class ImplCoursDAO implements ICoursDAO {
                 cours.setDescriptionCours(resultat.getString(6));
                 cours.setAffiche(resultat.getString(8));
                 cours.setBadge(resultat.getString(7));
+                cours.setVideo(resultat.getString(9));
+                cours.setValidation1(Etat.valueOf(resultat.getString(10)));
+                cours.setValidation2(Etat.valueOf(resultat.getString(11)));
+                
                 
                 listeCours.add(cours);
             }
@@ -100,9 +105,17 @@ public class ImplCoursDAO implements ICoursDAO {
         ps.setInt(1, idCours);
         ResultSet resultat = ps.executeQuery();
         while (resultat.next()) {
-            cours.setIdCours(resultat.getInt(1));
-            cours.setNomCours(resultat.getString(3));
-            cours.setDescriptionCours(resultat.getString(5));
+                cours.setIdCours(resultat.getInt(1));
+                cours.setIdMatiere(resultat.getInt(2));
+                cours.setIdFormateur(resultat.getInt(3));
+                cours.setNomCours(resultat.getString(4));
+                cours.setDifficulte(Difficulte.valueOf(resultat.getString(5)));
+                cours.setDescriptionCours(resultat.getString(6));
+                cours.setAffiche(resultat.getString(8));
+                cours.setBadge(resultat.getString(7));
+                cours.setVideo(resultat.getString(9));
+                cours.setValidation1(Etat.valueOf(resultat.getString(10)));
+                cours.setValidation2(Etat.valueOf(resultat.getString(11)));
         }
         if (Objects.nonNull(cours)) {
             return cours;

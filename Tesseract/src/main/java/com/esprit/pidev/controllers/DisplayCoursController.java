@@ -10,6 +10,7 @@ import com.esprit.pidev.models.daos.interfaces.implementations.ImplMatiereDAO;
 import com.esprit.pidev.models.entities.Cours;
 import com.esprit.pidev.models.entities.Matiere;
 import com.esprit.pidev.models.enums.Difficulte;
+import com.esprit.pidev.models.enums.Etat;
 import com.esprit.pidev.tesseract.MainApp;
 import java.io.IOException;
 import java.net.URL;
@@ -233,7 +234,19 @@ public class DisplayCoursController implements Initializable {
     private void handleAfficherChapitre(){
         Cours selectedCours = coursDisplayCourTable.getSelectionModel().getSelectedItem();
         if (selectedCours != null) {
-            showChapitreDialog(Integer.parseInt(idDisplayCourLabel.getText()));
+            if(selectedCours.getValidation1()==Etat.ACC){
+                showChapitreDialog(Integer.parseInt(idDisplayCourLabel.getText()));
+            }
+            else{
+                Alert alert = new Alert(AlertType.WARNING);
+                alert.initOwner(primaryStage);
+                alert.setTitle("Non validé");
+                alert.setHeaderText("Le cour n'a pas encore été validé par le comité");
+                alert.setContentText("vous serez informez de tout changement");
+
+            alert.showAndWait();
+            }
+            
         } else {
             // Nothing selected.
             Alert alert = new Alert(AlertType.WARNING);

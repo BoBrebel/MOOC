@@ -33,27 +33,27 @@ public class ImplEpreuveObjectifDAO implements IEpreuveObjectifDAO {
     
 
     @Override
-    public boolean createEpreuveObjectif(EpreuveObjectif epreuveObjectif) {
+    public int createEpreuveObjectif(EpreuveObjectif epreuveObjectif) {
         try {
-            String request="insert into epreuves(difficulte,type) values (?,?)";
-            pst = connection.prepareStatement(request);
-            pst.setString(1, epreuveObjectif.getDifficulte());
-            pst.setString(2, TYPE);
+            String request="insert into epreuve(type) values (?)";
+            pst = connection.prepareStatement(request, PreparedStatement.RETURN_GENERATED_KEYS);
+            pst.setString(1, TYPE);
             
             int result = pst.executeUpdate();
-            pst.close();
+            rS=pst.getGeneratedKeys();
+            rS.first();
             
-            return (result==1);
+            return rS.getInt(1);
         } catch (SQLException ex) {
             Logger.getLogger(ImplEpreuveObjectifDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;   
+        return 0;   
     }
 
     @Override
     public boolean deleteEpreuveObjectif(int id) {
         try {
-            String request = "dele from epreuves where id="+id;
+            String request = "dele from epreuve where id="+id;
             int result= pst.executeUpdate(request);
             pst.close();
             return (result==1);
@@ -65,29 +65,30 @@ public class ImplEpreuveObjectifDAO implements IEpreuveObjectifDAO {
 
     @Override
     public boolean updateEpreuveObjectif(EpreuveObjectif epreuveObjectif, int id) {
-        try {
-            String request="update epreuves set difficulte=? where id=?";
-            pst = connection.prepareStatement(request);
-            pst.setString(1, epreuveObjectif.getDifficulte());
-            pst.setInt(2, id);
-            int result = pst.executeUpdate();
-            pst.close();
-            return result==1;
-        } catch (SQLException ex) {
-            Logger.getLogger(ImplEpreuveObjectifDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
+    /*try {
+    String request="update epreuves set difficulte=? where id=?";
+    pst = connection.prepareStatement(request);
+    pst.setInt(1, id);
+    int result = pst.executeUpdate();
+    pst.close();
+    return result==1;
+    } catch (SQLException ex) {
+    Logger.getLogger(ImplEpreuveObjectifDAO.class.getName()).log(Level.SEVERE, null, ex);
+    }*/
+    return false;
     }
 
     @Override
     public EpreuveObjectif searchEpreuveObjectif(int id) {
         EpreuveObjectif epreuveObjectif = new EpreuveObjectif();
+        String request="select * from epreuve where id_objectif=?";
         try {
-            String request="select * from epreuves where id=?";
-            rS = pst.executeQuery(request);
-            rS.next();
-            epreuveObjectif.setId(rS.getInt("id"));
-            epreuveObjectif.setDifficulte(rS.getString("difficulte"));
+            pst = connection.prepareStatement(request);
+            pst.setInt(1, id);
+            rS = pst.executeQuery();
+            while(rS.next()){
+                epreuveObjectif.setId(rS.getInt("id"));
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ImplEpreuveObjectifDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -98,7 +99,7 @@ public class ImplEpreuveObjectifDAO implements IEpreuveObjectifDAO {
     public List<EpreuveObjectif> displayEpreuveObjectif() {
         List<EpreuveObjectif> epreuves=new ArrayList<>();
         try {
-            String request="select * from epreuves";
+            String request="select * from epreuve";
             pst=connection.prepareStatement(request);
             rS=pst.executeQuery();
             while(rS.next()){

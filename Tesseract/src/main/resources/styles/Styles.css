@@ -1,3 +1,25 @@
 #login-rect{
     -fx-fill: #036A7D;
 }
+.table-view .column-header .label, .table-view .filler .label,
+	.table-view .column-drag-header .label, .tree-table-view .column-header .label,
+	.tree-table-view .filler .label, .tree-table-view .column-drag-header .label, .table-cell
+	{
+	-fx-alignment: CENTER;
+}
+.tool-bar .button, .tool-bar .toggle-button {
+	-fx-background-color: -swatch-toolbar;
+	-fx-text-fill: -fx-text-base-color;
+	-fx-pref-height: 42;
+	-fx-pref-width: 100;
+	-fx-min-height: 42;
+	-fx-min-width: 42;
+	-fx-padding: 0;
+	-fx-background-radius: 0;
+}
+#desc{
+    -fx-text-fill : #4a3232;
+}
+#mat{
+    -fx-text-fill: #42A5F5;
+}

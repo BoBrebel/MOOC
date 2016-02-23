@@ -166,7 +166,7 @@ public class DisplayChapitreController implements Initializable {
             Alert alert = new Alert(AlertType.WARNING);
             alert.initOwner(primaryStage);
             alert.setTitle("No Selection");
-            alert.setHeaderText("No Cours Selected");
+            alert.setHeaderText("No Chapitre Selected");
             alert.setContentText("Please select a cours in the table.");
 
             alert.showAndWait();

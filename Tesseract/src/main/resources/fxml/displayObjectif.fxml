@@ -6,9 +6,14 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import java.net.*?>
 
 <AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.pidev.controllers.DisplayObjectifController">
-   <children>
+   <stylesheets>
+        <URL value="@../styles/material-fx-v0_3.css" />
+        <URL value="@../styles/Styles.css" />
+    </stylesheets>
+    <children>
       <SplitPane dividerPositions="0.29797979797979796" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -29,7 +34,7 @@
                   <ToolBar prefHeight="42.0" prefWidth="627.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <items>
                         <Button mnemonicParsing="false" onAction="#handleAddObjectif" text="Ajouter..." />
-                        <Button mnemonicParsing="false" text="Modifier..." />
+                        <Button mnemonicParsing="false" onAction="#handleEditObjectif" text="Modifier..." />
                         <Button mnemonicParsing="false" onAction="#handleDeleteObjectif" text="Supprimer" />
                      </items>
                   </ToolBar>
@@ -72,7 +77,7 @@
                      </rowConstraints>
                   </GridPane>
                   <Label text="Détail de l'Objectif" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
-                  <Button mnemonicParsing="false" text="Afficher le quiz" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0" />
+                  <Button mnemonicParsing="false" onAction="#handleAfficherQuiz" text="Afficher le quiz" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0" />
                </children>
             </AnchorPane>
          </items>

@@ -35,7 +35,7 @@ public class ImplReponseDAO implements IReponseDAO{
     @Override
     public boolean createReponse(Reponse reponse) {
         try {
-            String request="insert into reponses(reponse, justification, etat, id_question) values(?,?,?,?)";
+            String request="insert into reponse(reponse, justification, etat, id_question) values(?,?,?,?)";
             pst = connection.prepareStatement(request);
             pst.setString(1, reponse.getReponse());
             pst.setString(2, reponse.getJustification());
@@ -55,7 +55,7 @@ public class ImplReponseDAO implements IReponseDAO{
     @Override
     public boolean deleteReponse(int id) {
         try {
-            String request = "delete from reponses where id="+id;
+            String request = "delete from reponse where id="+id;
             int result= pst.executeUpdate(request);
             pst.close();
             return (result==1);
@@ -68,7 +68,7 @@ public class ImplReponseDAO implements IReponseDAO{
     @Override
     public boolean updateReponse(Reponse reponse, int id) {
         try {
-            String request = "update reponses set reponse=?, justification=?, etat=?, id_question=? where id=?";
+            String request = "update reponse set reponse=?, justification=?, etat=?, id_question=? where id=?";
             pst = connection.prepareStatement(request);
             pst.setString(1, reponse.getReponse());
             pst.setString(2, reponse.getJustification());
@@ -88,7 +88,7 @@ public class ImplReponseDAO implements IReponseDAO{
     public Reponse searchReponse(int id) {
         Reponse reponse = new Reponse();
         try {
-            String request="select * from reponses where id =?";
+            String request="select * from reponse where id =?";
             rS = pst.executeQuery(request);
             rS.next();
             reponse.setId(rS.getInt("id"));
@@ -103,19 +103,23 @@ public class ImplReponseDAO implements IReponseDAO{
     }
 
     @Override
-    public List<Reponse> displayReponse() {
+    public List<Reponse> displayReponse(int id) {
         List<Reponse> epreuves=new ArrayList<>();
         try {
-            String request="select * from reponses";
+            String request="select * from reponse where id_question="+id;
+            System.out.println(request);
             pst=connection.prepareStatement(request);
             rS=pst.executeQuery();
             while(rS.next()){
                 Reponse r=new Reponse(rS.getInt(1),rS.getString("reponse"),rS.getString("justification"),rS.getString("etat"), rS.getInt(2));
+                System.out.println(r);
                 epreuves.add(r);
+                System.out.println(epreuves);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ImplReponseDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        System.out.println();
         return epreuves;
     }
     

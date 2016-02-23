@@ -17,6 +17,6 @@ public interface IReponseDAO {
     boolean deleteReponse(int id);
     boolean updateReponse(Reponse reponse, int id);
     Reponse searchReponse(int id);
-    List<Reponse> displayReponse();
+    List<Reponse> displayReponse(int id);
     
 }

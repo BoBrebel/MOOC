@@ -6,6 +6,7 @@
 package com.esprit.pidev.models.daos.interfaces;
 import com.esprit.pidev.models.entities.Question;
 import java.util.List;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -13,10 +14,10 @@ import java.util.List;
  */
 public interface IQuestionDAO {
     
-    boolean createQuestion(Question question);
+    int createQuestion(Question question);
     boolean deleteQuestion(int id);
     boolean updateQuestion(Question question, int id);
     Question searchQuestion(int id);
-    List<Question> displayQuestion();
+    ObservableList<Question> displayQuestion(int id);
     
 }

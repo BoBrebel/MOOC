@@ -153,4 +153,102 @@ public class DisplayObjectifController implements Initializable {
             return false;
         }
     }
+    
+    @FXML
+    private void handleEditObjectif(){
+        Objectif selectedObjectif = objectifDisplayObjectifTable.getSelectionModel().getSelectedItem();
+        if(selectedObjectif!=null){
+            boolean modifiedClicked = showObjectifEditDialog(selectedObjectif);
+            if(modifiedClicked){
+                showObjectifDetails(selectedObjectif);
+            }
+            
+        }
+        else{
+             // Nothing selected.
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(primaryStage);
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Chapitre Selected");
+            alert.setContentText("Please select a cours in the table.");
+
+            alert.showAndWait();
+        }
+    }
+
+    private boolean showObjectifEditDialog(Objectif objectif) {
+        try{
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("/fxml/editObjectif.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Ajouter un Cours");
+            dialogStage.initModality(Modality.APPLICATION_MODAL);
+            dialogStage.initStyle(StageStyle.UTILITY);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the cours into the controller.
+            EditObjectifController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setObjectif(objectif, idChapitre);
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+        }catch(IOException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    @FXML
+    private void handleAfficherQuiz(){
+        Objectif objectif = objectifDisplayObjectifTable.getSelectionModel().getSelectedItem();
+        if(objectif !=null){
+            showQuizDialog(objectif.getId());
+        }
+        else{
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(primaryStage);
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Chapitre Selected");
+            alert.setContentText("Please select a Objectif in the table.");
+
+            alert.showAndWait();
+        }
+    }
+    private void showQuizDialog(int id) {
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            System.out.println("hello");
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("/fxml/displayQuiz.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Quiz de l'objectif");
+            dialogStage.initModality(Modality.APPLICATION_MODAL);
+            dialogStage.initStyle(StageStyle.UTILITY);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the cours into the controller.
+            DisplayQuizController control = loader.getController();
+            control.setDialogStage(dialogStage);
+            control.setQuiz(id);
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -59,6 +59,8 @@ public class AddCoursController implements Initializable {
     private Button afficheAddCourButton;
     @FXML
     private Label nomAddCoursLabel;
+    @FXML
+    private TextField videoAddCoursTextField;
     
     private Image imageBadge;
     private Image imageAffiche;
@@ -119,6 +121,7 @@ public class AddCoursController implements Initializable {
                 cours.setBadge(badgeAddCoursLabel.getText());
                 cours.setAffiche(afficheAddCoursLabel.getText());
                 cours.setDescriptionCours(descriptionAddCoursTextArea.getText());
+                cours.setVideo(videoAddCoursTextField.getText());
                 ImplCoursDAO coursDAO = new ImplCoursDAO();
                 coursDAO.AjouterCours(cours);
                 ajouterClicked = true;

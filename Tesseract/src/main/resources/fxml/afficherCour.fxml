@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.media.*?>
+<?import javafx.scene.web.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="1000.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.pidev.controllers.AfficherCourController">
+   <stylesheets>
+        <URL value="@../styles/material-fx-v0_3.css" />
+        <URL value="@../styles/Styles.css" />
+    </stylesheets>
+    <children>
+      <TableView fx:id="chapitreDisplayChapitreTable" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="700.0">
+        <columns>
+          <TableColumn fx:id="numeroDisplayChapitreColumn" prefWidth="59.0" sortable="false" />
+          <TableColumn fx:id="nomDisplayChapitreColumn" prefWidth="639.0" text="Chapitres" />
+        </columns>
+      </TableView>
+      <Label fx:id="nomCourAfficherLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="115.0" prefWidth="900.0" text="Label" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="33.0" />
+         </font>
+      </Label>
+      <Button mnemonicParsing="false" text="Get Started!" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+      <WebView fx:id="webview" prefHeight="370.0" prefWidth="200.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="100.0" />
+      <Label id="desc" fx:id="descriptionAffichageLabel" alignment="CENTER" ellipsisString="" prefHeight="249.0" prefWidth="700.0" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." textAlignment="CENTER" textFill="#4a3232" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="470.0" />
+      <Label id="mat" fx:id="matiereAffichageLabel" layoutX="466.0" layoutY="70.0" text="Label" textFill="#008cff">
+         <font>
+            <Font name="Agency FB" size="20.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="imageV" fitHeight="50.0" fitWidth="50.0" layoutX="353.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>

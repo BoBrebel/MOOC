@@ -13,7 +13,7 @@ import java.util.List;
  * @author Bacem
  */
 public interface IEpreuveObjectifDAO {
-    boolean createEpreuveObjectif(EpreuveObjectif epreuveObjectif);
+    int createEpreuveObjectif(EpreuveObjectif epreuveObjectif);
     boolean deleteEpreuveObjectif(int id);
     boolean updateEpreuveObjectif(EpreuveObjectif epreuveObjectif, int id);
     EpreuveObjectif searchEpreuveObjectif(int id);

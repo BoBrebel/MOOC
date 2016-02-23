@@ -10,8 +10,8 @@
    <children>
       <GridPane AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="60.0">
          <children>
-            <Label text="Nom du chapitre" GridPane.rowIndex="1" />
-            <Label text="Numéro du Chapitre" GridPane.rowIndex="2" />
+            <Label text="Nom de l'Objectif" GridPane.rowIndex="1" />
+            <Label text="Numéro de l'Objectif" GridPane.rowIndex="2" />
             <Label text="Description" GridPane.rowIndex="3" />
             <TextField fx:id="nomAddObjectifTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="numeroAddObjectifTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />

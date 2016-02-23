@@ -68,13 +68,14 @@ public class ImplObjectifDAO implements IObjectifDAO{
 
     @Override
     public boolean updateObjectif(Objectif o) {
-        String request = "UPDATE objectif SET numero=?, nom=?, description=?, difficulte=?";
+        String request = "UPDATE objectif SET numero=?, nom=?, description=?, difficulte=? where id=?";
         try {
             PreparedStatement ps = cnx.prepareStatement(request);
             ps.setString(2, o.getNom());
             ps.setInt(1, o.getNumero());
             ps.setString(3, o.getDescription());
             ps.setString(4, o.getDifficulte().toString());
+            ps.setInt(5, o.getId());
             int add = ps.executeUpdate();
             ps.close();
             return add==1;
@@ -87,7 +88,7 @@ public class ImplObjectifDAO implements IObjectifDAO{
     @Override
     public ObservableList<Objectif> displayObjectifs(int idChapitre) {
         ObservableList<Objectif> listeObjectif = FXCollections.observableArrayList();
-        String request = "SELECT * FROM objectif WHERE id_chapitre=?";
+        String request = "SELECT * FROM objectif WHERE id_chapitre=? ORDER BY numero";
         try {
             PreparedStatement ps = cnx.prepareStatement(request);
             ps.setInt(1, idChapitre);
