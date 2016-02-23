@@ -7,8 +7,6 @@ package com.esprit.pidev.controllers;
 
 import com.esprit.pidev.models.daos.interfaces.implementations.ImplUserDAO;
 import com.esprit.pidev.models.database.DataSource;
-import com.esprit.pidev.models.enums.Role;
-import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;

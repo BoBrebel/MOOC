@@ -7,6 +7,7 @@ package com.esprit.pidev.models.daos.interfaces.implementations;
 
 import com.esprit.pidev.models.daos.interfaces.ILogDAO;
 import com.esprit.pidev.models.database.DataSource;
+import com.esprit.pidev.models.entities.Cours;
 import com.esprit.pidev.models.entities.Log;
 import java.sql.Connection;
 import java.sql.Date;
@@ -16,6 +17,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -63,8 +68,8 @@ public class ImplLogDAO implements ILogDAO{
 
 
     @Override
-    public List<Log> getallLog() {
-        ArrayList<Log> listeLog = new ArrayList<Log>();
+    public ObservableList<Log> getallLog() {
+        ObservableList<Log> listeLog = FXCollections.observableArrayList();
         
         String query = "select * from log";
         
@@ -83,9 +88,9 @@ public class ImplLogDAO implements ILogDAO{
             }
             return listeLog;
         } catch (SQLException ex) {
-            //Logger.getLogger(PersonneDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ImplLogDAO.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("erreur lors du chargement des Logs " + ex.getMessage());
-            return null;
+            return listeLog;
         }
         
     }

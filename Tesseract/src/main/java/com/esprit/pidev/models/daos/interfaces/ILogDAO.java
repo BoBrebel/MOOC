@@ -6,7 +6,9 @@
 package com.esprit.pidev.models.daos.interfaces;
 
 import com.esprit.pidev.models.entities.Log;
+import java.sql.SQLException;
 import java.util.List;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -18,7 +20,7 @@ public interface ILogDAO {
     
     public boolean supprimerLog(int id);
         
-    public List<Log> getallLog();
+    public ObservableList<Log> getallLog() throws SQLException;
     
     public Log getLogbyid(int id);
     
